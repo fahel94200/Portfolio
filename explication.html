@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Développement du Site BTS CIEL avec Laravel & Docker</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js pour le code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #667eea;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--light);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--dark);
+            color: white;
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .sidebar-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        .nav-section {
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px 60px;
+            max-width: 1200px;
+        }
+
+        /* Chapter Styles */
+        .chapter {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+        }
+
+        .chapter-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .chapter h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .chapter-intro {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section h3 i {
+            color: var(--secondary);
+        }
+
+        .section h4 {
+            color: #444;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--dark);
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-header span {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-header .file-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-header .file-icon i {
+            color: var(--secondary);
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .info-box i {
+            font-size: 1.3rem;
+            margin-top: 3px;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-left: 4px solid var(--success);
+        }
+
+        .info-box.tip i { color: var(--success); }
+
+        .info-box.warning {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+        }
+
+        .info-box.warning i { color: var(--warning); }
+
+        .info-box.danger {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+        }
+
+        .info-box.danger i { color: var(--danger); }
+
+        .info-box.info {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-box.info i { color: var(--secondary); }
+
+        .info-box-content h5 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .info-box-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Tables */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .custom-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background: white;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .custom-table code {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--danger);
+        }
+
+        /* Diagrams */
+        .diagram {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .diagram pre {
+            margin: 0;
+            white-space: pre;
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            margin: 25px 0;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+
+        .step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step h5 {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Badges */
+        .badge-tech {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 3px;
+        }
+
+        .badge-php { background: #4f5b93; color: white; }
+        .badge-laravel { background: #ff2d20; color: white; }
+        .badge-mysql { background: #00758f; color: white; }
+        .badge-docker { background: #2496ed; color: white; }
+        .badge-html { background: #e34f26; color: white; }
+        .badge-css { background: #1572b6; color: white; }
+        .badge-js { background: #f7df1e; color: black; }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .summary-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summary-box li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .summary-box li i {
+            color: #86efac;
+            margin-top: 4px;
+        }
+
+        /* Progress Bar */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+
+            .progress-indicator {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: var(--primary);
+                color: white;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 12px;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+
+            .chapter {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .sidebar, .progress-indicator, .menu-toggle {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .chapter {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-graduation-cap"></i> Cours Complet</h3>
+            <p>Site BTS CIEL - Laravel & Docker</p>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Introduction</div>
+            <a href="#chapitre-0" class="nav-link active">
+                <i class="fas fa-home"></i> Présentation du projet
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Développement</div>
+            <a href="#chapitre-1" class="nav-link">
+                <i class="fas fa-exchange-alt"></i> Migration vers Laravel
+            </a>
+            <a href="#chapitre-2" class="nav-link">
+                <i class="fas fa-sitemap"></i> Architecture MVC
+            </a>
+            <a href="#chapitre-3" class="nav-link">
+                <i class="fas fa-lock"></i> Authentification
+            </a>
+            <a href="#chapitre-4" class="nav-link">
+                <i class="fas fa-tachometer-alt"></i> Dashboard Admin
+            </a>
+            <a href="#chapitre-5" class="nav-link">
+                <i class="fas fa-newspaper"></i> Gestion Actualités
+            </a>
+            <a href="#chapitre-6" class="nav-link">
+                <i class="fas fa-folder"></i> Gestionnaire Fichiers
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Sécurité & Déploiement</div>
+            <a href="#chapitre-7" class="nav-link">
+                <i class="fas fa-shield-alt"></i> Sécurité
+            </a>
+            <a href="#chapitre-8" class="nav-link">
+                <i class="fab fa-docker"></i> Docker
+            </a>
+            <a href="#chapitre-9" class="nav-link">
+                <i class="fas fa-rocket"></i> Déploiement
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Annexes</div>
+            <a href="#chapitre-10" class="nav-link">
+                <i class="fas fa-terminal"></i> Commandes utiles
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Chapitre 0: Introduction -->
+        <article class="chapter" id="chapitre-0">
+            <div class="chapter-number">0</div>
+            <h2>Présentation du Projet</h2>
+            <p class="chapter-intro">
+                Bienvenue dans ce cours complet qui retrace tout le développement du site BTS CIEL. 
+                Tu vas apprendre comment on a transformé un site HTML statique en une application web moderne 
+                avec Laravel, un dashboard admin sécurisé, et un déploiement Docker.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-info-circle"></i> Le Contexte</h3>
+                <p>
+                    Le Lycée Christophe Colomb possédait un site web pour la section BTS CIEL 
+                    (Cybersécurité, Informatique et réseaux, Électronique). Ce site était entièrement 
+                    en HTML/CSS statique, ce qui rendait les mises à jour difficiles pour les enseignants.
+                </p>
+
+                <h4>Les problèmes du site existant :</h4>
+                <ul>
+                    <li>❌ Pages HTML statiques difficiles à maintenir</li>
+                    <li>❌ Pas de système de gestion de contenu</li>
+                    <li>❌ Pas d'espace administrateur</li>
+                    <li>❌ Duplication de code (header/footer sur chaque page)</li>
+                    <li>❌ Déploiement manuel</li>
+                </ul>
+
+                <h4>Notre solution :</h4>
+                <ul>
+                    <li>✅ Migration vers Laravel (framework PHP moderne)</li>
+                    <li>✅ Dashboard administrateur complet</li>
+                    <li>✅ Système d'authentification sécurisé</li>
+                    <li>✅ Gestion des actualités et fichiers</li>
+                    <li>✅ Containerisation Docker</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-layer-group"></i> Technologies Utilisées</h3>
+                <p>
+                    <span class="badge-tech badge-laravel"><i class="fab fa-laravel"></i> Laravel 11</span>
+                    <span class="badge-tech badge-php"><i class="fab fa-php"></i> PHP 8.3</span>
+                    <span class="badge-tech badge-mysql"><i class="fas fa-database"></i> MySQL 8.0</span>
+                    <span class="badge-tech badge-docker"><i class="fab fa-docker"></i> Docker</span>
+                    <span class="badge-tech badge-html"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="badge-tech badge-css"><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span class="badge-tech badge-js"><i class="fab fa-js"></i> jQuery</span>
+                </p>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-list-check"></i> Ce que j'ai appris</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Comment migrer un site statique vers Laravel</li>
+                    <li><i class="fas fa-check"></i> L'architecture MVC (Modèle-Vue-Contrôleur)</li>
+                    <li><i class="fas fa-check"></i> Créer un système d'authentification sécurisé</li>
+                    <li><i class="fas fa-check"></i> Développer un dashboard administrateur</li>
+                    <li><i class="fas fa-check"></i> Implémenter les opérations CRUD</li>
+                    <li><i class="fas fa-check"></i> Sécuriser une application web</li>
+                    <li><i class="fas fa-check"></i> Containeriser avec Docker</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 1: Migration vers Laravel -->
+        <article class="chapter" id="chapitre-1">
+            <div class="chapter-number">1</div>
+            <h2>Migration vers Laravel</h2>
+            <p class="chapter-intro">
+                La première étape consistait à transformer les pages HTML statiques en pages dynamiques 
+                Laravel utilisant le moteur de templates Blade.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-question-circle"></i> C'est quoi Laravel ?</h3>
+                <p>
+                    Laravel est un <strong>framework PHP</strong> qui facilite le développement d'applications web. 
+                    Il fournit des outils et une structure pour organiser ton code proprement.
+                </p>
+
+                <div class="info-box info">
+                    <i class="fas fa-lightbulb"></i>
+                    <div class="info-box-content">
+                        <h5>Analogie simple</h5>
+                        <p>
+                            Imagine que tu construis une maison. Tu peux tout faire toi-même (couler le béton, 
+                            poser les briques...) ou utiliser des éléments préfabriqués. Laravel, c'est comme 
+                            utiliser des éléments préfabriqués : plus rapide, plus solide, plus propre !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-file-code"></i> Avant/Après : Une page HTML</h3>
+                
+                <h4>❌ AVANT (HTML statique) :</h4>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-html5"></i> iris.html</span>
+                    </div>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;BTS CIEL - IRIS&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Header copié sur CHAQUE page --&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;a href="index.html"&gt;Accueil&lt;/a&gt;
+            &lt;a href="cours.html"&gt;Cours&lt;/a&gt;
+            &lt;a href="projets.html"&gt;Projets&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;h1&gt;Informations BTS CIEL&lt;/h1&gt;
+        &lt;!-- Contenu... --&gt;
+    &lt;/main&gt;
+    
+    &lt;!-- Footer copié sur CHAQUE page --&gt;
+    &lt;footer&gt;
+        &lt;p&gt;© 2024 Lycée Christophe Colomb&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <h4>✅ APRÈS (Laravel Blade) :</h4>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> resources/views/iris.blade.php</span>
+                    </div>
+                    <pre><code class="language-php">@extends('layouts.template')
+
+@section('title', 'BTS CIEL - IRIS')
+
+@section('content')
+    &lt;main&gt;
+        &lt;h1&gt;Informations BTS CIEL&lt;/h1&gt;
+        &lt;!-- Contenu... --&gt;
+    &lt;/main&gt;
+@endsection</code></pre>
+                </div>
+
+                <div class="info-box tip">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="info-box-content">
+                        <h5>Avantage</h5>
+                        <p>
+                            Le header et le footer sont maintenant dans <code>layouts/template.blade.php</code>. 
+                            Si tu veux modifier le menu, tu le fais UNE SEULE fois et toutes les pages sont mises à jour !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-puzzle-piece"></i> Le Layout Principal</h3>
+                <p>
+                    Le layout est le "squelette" de ton site. Il contient tout ce qui est commun à toutes les pages.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> resources/views/layouts/template.blade.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;@yield('title') - Lycée Christophe Colomb&lt;/title&gt;
+    
+    &lt;!-- CSS commun à toutes les pages --&gt;
+    &lt;link rel="stylesheet" href="{{ asset('css/style.css') }}"&gt;
+    &lt;link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"&gt;
+    
+    @stack('styles') &lt;!-- CSS spécifique à certaines pages --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- HEADER (écrit UNE SEULE fois) --&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;a href="{{ route('home') }}"&gt;Accueil&lt;/a&gt;
+            &lt;a href="{{ route('cours') }}"&gt;Cours&lt;/a&gt;
+            &lt;a href="{{ route('projets') }}"&gt;Projets&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;!-- CONTENU DYNAMIQUE --&gt;
+    @yield('content')
+    
+    &lt;!-- FOOTER (écrit UNE SEULE fois) --&gt;
+    &lt;footer&gt;
+        &lt;p&gt;© 2024 Lycée Christophe Colomb - Développé par Fahel Brik&lt;/p&gt;
+    &lt;/footer&gt;
+    
+    &lt;!-- Scripts --&gt;
+    &lt;script src="{{ asset('js/jquery.min.js') }}"&gt;&lt;/script&gt;
+    @stack('scripts')
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <h4>Les directives Blade importantes :</h4>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Directive</th>
+                            <th>Utilité</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>@extends</code></td>
+                            <td>Hérite d'un layout parent</td>
+                            <td><code>@extends('layouts.template')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@section</code></td>
+                            <td>Définit le contenu d'une zone</td>
+                            <td><code>@section('content')...@endsection</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@yield</code></td>
+                            <td>Affiche le contenu d'une section</td>
+                            <td><code>@yield('content')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{{ }}</code></td>
+                            <td>Affiche une variable PHP (sécurisé)</td>
+                            <td><code>{{ $user->name }}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{{ asset() }}</code></td>
+                            <td>Génère l'URL d'un fichier public</td>
+                            <td><code>{{ asset('img/logo.png') }}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{{ route() }}</code></td>
+                            <td>Génère l'URL d'une route nommée</td>
+                            <td><code>{{ route('home') }}</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé du Chapitre</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Laravel utilise le moteur de templates Blade (.blade.php)</li>
+                    <li><i class="fas fa-check"></i> Un layout centralise le header/footer</li>
+                    <li><i class="fas fa-check"></i> @extends et @section permettent l'héritage de templates</li>
+                    <li><i class="fas fa-check"></i> {{ asset() }} et {{ route() }} génèrent les URLs proprement</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 2: Architecture MVC -->
+        <article class="chapter" id="chapitre-2">
+            <div class="chapter-number">2</div>
+            <h2>Architecture MVC</h2>
+            <p class="chapter-intro">
+                MVC signifie Modèle-Vue-Contrôleur. C'est une façon d'organiser ton code en séparant 
+                les responsabilités. Laravel suit cette architecture.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-cubes"></i> Les 3 composants</h3>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           ARCHITECTURE MVC                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+     UTILISATEUR
+         │
+         │ 1. Requête HTTP (ex: GET /cours)
+         ▼
+    ┌─────────────────────────────────────────────────────────────┐
+    │                     ROUTES (web.php)                         │
+    │     Route::get('/cours', [PublicController::class, 'cours'])│
+    └─────────────────────────────────────────────────────────────┘
+         │
+         │ 2. Appelle le contrôleur
+         ▼
+    ┌─────────────────────────────────────────────────────────────┐
+    │                  CONTROLLER (Contrôleur)                     │
+    │                                                              │
+    │   public function cours() {                                  │
+    │       $cours = Cours::all();  // 3. Demande les données     │
+    │       return view('cours', compact('cours')); // 5. Retourne│
+    │   }                                                          │
+    └─────────────────────────────────────────────────────────────┘
+         │                                          │
+         │ 3. Récupère les données                  │ 5. Envoie à la vue
+         ▼                                          ▼
+    ┌──────────────────────┐            ┌──────────────────────────┐
+    │    MODEL (Modèle)    │            │      VIEW (Vue)          │
+    │                      │            │                          │
+    │ - Représente les     │            │ - Affiche les données    │
+    │   données (BDD)      │            │ - Fichiers .blade.php    │
+    │ - Eloquent ORM       │            │ - HTML + CSS + données   │
+    │                      │            │                          │
+    │   News.php           │            │   cours.blade.php        │
+    │   File.php           │            │   projets.blade.php      │
+    │   AdminUser.php      │            │                          │
+    └──────────────────────┘            └──────────────────────────┘
+         │                                          │
+         │ 4. Renvoie les données                   │ 6. HTML final
+         └──────────────────────────────────────────┘
+                                                    │
+                                                    ▼
+                                             UTILISATEUR
+                                          (voit la page web)
+</pre>
+                </div>
+
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Composant</th>
+                            <th>Rôle</th>
+                            <th>Emplacement Laravel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Model</strong> (Modèle)</td>
+                            <td>Gère les données et la base de données</td>
+                            <td><code>app/Models/</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>View</strong> (Vue)</td>
+                            <td>Affiche les données (HTML)</td>
+                            <td><code>resources/views/</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Controller</strong> (Contrôleur)</td>
+                            <td>Fait le lien entre Model et View</td>
+                            <td><code>app/Http/Controllers/</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-route"></i> Les Routes</h3>
+                <p>
+                    Les routes définissent quelle URL appelle quelle fonction. C'est un peu comme le "GPS" de l'application.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> routes/web.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+
+// Routes publiques
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/cours', [PublicController::class, 'cours'])->name('cours');
+Route::get('/projets', [PublicController::class, 'projets'])->name('projets');
+Route::get('/iris', [PublicController::class, 'iris'])->name('iris');
+
+// Routes d'authentification
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+});
+
+// Routes admin protégées (nécessitent d'être connecté)
+Route::middleware(['admin.auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/news', [AdminController::class, 'index'])->name('admin.news.index');
+    // ...
+});</code></pre>
+                </div>
+
+                <div class="info-box info">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="info-box-content">
+                        <h5>Comprendre une route</h5>
+                        <p>
+                            <code>Route::get('/cours', [PublicController::class, 'cours'])->name('cours');</code><br><br>
+                            • <strong>get</strong> : Méthode HTTP (get = afficher, post = envoyer des données)<br>
+                            • <strong>/cours</strong> : L'URL dans le navigateur<br>
+                            • <strong>PublicController::class</strong> : Le contrôleur qui gère cette route<br>
+                            • <strong>'cours'</strong> : La méthode du contrôleur à appeler<br>
+                            • <strong>name('cours')</strong> : Un nom pour référencer cette route facilement
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-cogs"></i> Le Contrôleur</h3>
+                <p>Le contrôleur contient la logique de l'application. Il reçoit la requête, traite les données, et retourne une vue.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> app/Http/Controllers/PublicController.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Models\News;
+
+class PublicController extends Controller
+{
+    // Affiche la page d'accueil
+    public function home()
+    {
+        // Récupère les 5 dernières actualités publiées
+        $actualites = News::where('is_published', true)
+                          ->orderBy('created_at', 'desc')
+                          ->take(5)
+                          ->get();
+        
+        // Retourne la vue avec les données
+        return view('home', compact('actualites'));
+    }
+    
+    // Affiche la page cours
+    public function cours()
+    {
+        return view('cours');
+    }
+    
+    // Affiche la page iris (BTS CIEL)
+    public function iris()
+    {
+        return view('iris');
+    }
+    
+    // Affiche la page projets
+    public function projets()
+    {
+        return view('projets');
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-database"></i> Le Modèle (Eloquent ORM)</h3>
+                <p>
+                    Le modèle représente une table de la base de données. Eloquent permet de manipuler 
+                    les données sans écrire de SQL.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> app/Models/News.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class News extends Model
+{
+    // La table associée (par défaut: "news")
+    protected $table = 'news';
+    
+    // Les champs qu'on peut remplir
+    protected $fillable = [
+        'title',
+        'content',
+        'is_published',
+        'published_at'
+    ];
+    
+    // Conversion automatique des types
+    protected $casts = [
+        'is_published' => 'boolean',
+        'published_at' => 'datetime'
+    ];
+}</code></pre>
+                </div>
+
+                <h4>Utilisation d'Eloquent :</h4>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>SQL classique</th>
+                            <th>Eloquent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tout récupérer</td>
+                            <td><code>SELECT * FROM news</code></td>
+                            <td><code>News::all()</code></td>
+                        </tr>
+                        <tr>
+                            <td>Trouver par ID</td>
+                            <td><code>SELECT * FROM news WHERE id = 5</code></td>
+                            <td><code>News::find(5)</code></td>
+                        </tr>
+                        <tr>
+                            <td>Créer</td>
+                            <td><code>INSERT INTO news ...</code></td>
+                            <td><code>News::create([...])</code></td>
+                        </tr>
+                        <tr>
+                            <td>Modifier</td>
+                            <td><code>UPDATE news SET ... WHERE id = 5</code></td>
+                            <td><code>$news->update([...])</code></td>
+                        </tr>
+                        <tr>
+                            <td>Supprimer</td>
+                            <td><code>DELETE FROM news WHERE id = 5</code></td>
+                            <td><code>$news->delete()</code></td>
+                        </tr>
+                        <tr>
+                            <td>Filtrer</td>
+                            <td><code>SELECT * FROM news WHERE is_published = 1</code></td>
+                            <td><code>News::where('is_published', true)->get()</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé du Chapitre</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> MVC sépare les responsabilités : Modèle (données), Vue (affichage), Contrôleur (logique)</li>
+                    <li><i class="fas fa-check"></i> Les routes définissent quelle URL appelle quelle fonction</li>
+                    <li><i class="fas fa-check"></i> Le contrôleur traite la requête et retourne une vue</li>
+                    <li><i class="fas fa-check"></i> Eloquent ORM permet de manipuler la BDD sans SQL</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 3: Authentification -->
+        <article class="chapter" id="chapitre-3">
+            <div class="chapter-number">3</div>
+            <h2>Système d'Authentification</h2>
+            <p class="chapter-intro">
+                L'authentification permet de vérifier l'identité d'un utilisateur. On a créé un système 
+                de connexion sécurisé pour les administrateurs.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-sign-in-alt"></i> Le Processus de Connexion</h3>
+                
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        PROCESSUS DE CONNEXION                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  UTILISATEUR                                                   SERVEUR
+      │                                                            │
+      │  1. Accède à /admin/login                                  │
+      │ ──────────────────────────────────────────────────────────►│
+      │                                                            │
+      │  2. Affiche le formulaire de connexion                     │
+      │ ◄──────────────────────────────────────────────────────────│
+      │                                                            │
+      │  3. Envoie username + password                             │
+      │ ──────────────────────────────────────────────────────────►│
+      │                                                            │
+      │                    ┌─────────────────────────────────────┐ │
+      │                    │ 4. Vérifie en base de données:      │ │
+      │                    │    - Le username existe ?            │ │
+      │                    │    - Le password correspond ?        │ │
+      │                    │      (comparaison bcrypt)            │ │
+      │                    └─────────────────────────────────────┘ │
+      │                                                            │
+      │  5a. Si VALIDE: Crée une session + redirige dashboard     │
+      │ ◄──────────────────────────────────────────────────────────│
+      │                                                            │
+      │  5b. Si INVALIDE: Affiche erreur + reste sur login        │
+      │ ◄──────────────────────────────────────────────────────────│
+</pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-code"></i> Le Contrôleur d'Authentification</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> app/Http/Controllers/AuthController.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AdminUser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller
+{
+    // Affiche le formulaire de connexion
+    public function showLogin()
+    {
+        return view('admin.login');
+    }
+    
+    // Traite la soumission du formulaire
+    public function login(Request $request)
+    {
+        // 1. Valider les données reçues
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        
+        // 2. Chercher l'utilisateur en BDD
+        $admin = AdminUser::where('username', $request->username)->first();
+        
+        // 3. Vérifier si l'utilisateur existe ET si le mot de passe est correct
+        if ($admin && Hash::check($request->password, $admin->password)) {
+            // ✅ Connexion réussie !
+            
+            // Stocker l'ID admin dans la session
+            session(['admin_id' => $admin->id]);
+            session(['admin_username' => $admin->username]);
+            session(['last_activity' => time()]); // Pour le timeout
+            
+            // Rediriger vers le dashboard
+            return redirect()->route('admin.dashboard')
+                             ->with('success', 'Bienvenue !');
+        }
+        
+        // ❌ Échec de connexion
+        return back()->withErrors(['login' => 'Identifiants incorrects']);
+    }
+    
+    // Déconnexion
+    public function logout()
+    {
+        // Supprimer les données de session
+        session()->forget(['admin_id', 'admin_username', 'last_activity']);
+        
+        return redirect()->route('admin.login')
+                         ->with('success', 'Vous êtes déconnecté');
+    }
+}</code></pre>
+                </div>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="info-box-content">
+                        <h5>Sécurité : Hash::check()</h5>
+                        <p>
+                            On n'utilise <strong>JAMAIS</strong> <code>$request->password == $admin->password</code> !<br>
+                            Le mot de passe en BDD est <strong>haché</strong> (ex: <code>$2y$12$xyz...</code>).<br>
+                            <code>Hash::check()</code> compare le mot de passe saisi avec le hash stocké de manière sécurisée.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-file-alt"></i> La Vue de Connexion</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> resources/views/admin/login.blade.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;form action="{{ route('admin.login') }}" method="POST"&gt;
+    @csrf  &lt;!-- Protection contre les attaques CSRF --&gt;
+    
+    &lt;!-- Afficher les erreurs --&gt;
+    @if($errors->any())
+        &lt;div class="alert alert-danger"&gt;
+            {{ $errors->first() }}
+        &lt;/div&gt;
+    @endif
+    
+    &lt;!-- Champ Username --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Nom d'utilisateur&lt;/label&gt;
+        &lt;input type="text" name="username" class="form-control" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Champ Password --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Mot de passe&lt;/label&gt;
+        &lt;input type="password" name="password" class="form-control" required&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <div class="info-box danger">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="info-box-content">
+                        <h5>Important : @csrf</h5>
+                        <p>
+                            La directive <code>@csrf</code> est <strong>OBLIGATOIRE</strong> dans tous les formulaires POST.<br>
+                            Elle génère un token qui protège contre les attaques CSRF (Cross-Site Request Forgery).<br>
+                            Sans elle, Laravel refusera la soumission du formulaire !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-shield-alt"></i> Le Middleware de Protection</h3>
+                <p>
+                    Un middleware est un "gardien" qui vérifie quelque chose avant de laisser passer la requête.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> app/Http/Middleware/AdminAuth.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class AdminAuth
+{
+    public function handle(Request $request, Closure $next)
+    {
+        // Vérifier si l'admin est connecté (session existe)
+        if (!session('admin_id')) {
+            // ❌ Pas connecté → Redirection vers login
+            return redirect()->route('admin.login')
+                             ->with('error', 'Veuillez vous connecter');
+        }
+        
+        // ✅ Connecté → Laisser passer la requête
+        return $next($request);
+    }
+}</code></pre>
+                </div>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      FONCTIONNEMENT DU MIDDLEWARE                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  Requête HTTP                                                       
+      │                                                              
+      ▼                                                              
+  ┌─────────────────────┐                                            
+  │    MIDDLEWARE       │                                            
+  │    AdminAuth        │                                            
+  │                     │                                            
+  │  session('admin_id')│                                            
+  │    existe ?         │                                            
+  └─────────────────────┘                                            
+      │           │                                                  
+      │ NON      │ OUI                                               
+      ▼           ▼                                                  
+  ┌─────────┐  ┌─────────────────┐                                   
+  │ REFUSÉ  │  │   AUTORISÉ      │                                   
+  │         │  │                 │                                   
+  │ Redirige│  │ Accède à la     │                                   
+  │ → Login │  │ page demandée   │                                   
+  └─────────┘  └─────────────────┘                                   
+</pre>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé du Chapitre</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Les mots de passe sont hachés avec bcrypt (jamais en clair !)</li>
+                    <li><i class="fas fa-check"></i> Hash::check() compare un mot de passe avec son hash</li>
+                    <li><i class="fas fa-check"></i> La session stocke l'ID de l'utilisateur connecté</li>
+                    <li><i class="fas fa-check"></i> @csrf protège les formulaires contre les attaques CSRF</li>
+                    <li><i class="fas fa-check"></i> Un middleware protège les routes réservées aux admins</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 4: Dashboard Admin -->
+        <article class="chapter" id="chapitre-4">
+            <div class="chapter-number">4</div>
+            <h2>Dashboard Administrateur</h2>
+            <p class="chapter-intro">
+                Le dashboard est l'interface centrale de l'administration. Il permet de gérer 
+                les actualités, les fichiers et les comptes administrateurs.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-sitemap"></i> Structure du Dashboard</h3>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         DASHBOARD ADMIN                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌─────────────────────────────────────────────────────────────────────┐   │
+│   │                        NAVIGATION                                    │   │
+│   │  [Dashboard] [Actualités] [Fichiers] [Créer Admin] [Mot de passe]   │   │
+│   └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+│   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐            │
+│   │  📰 ACTUALITÉS  │  │  📁 FICHIERS    │  │  👤 ADMINS      │            │
+│   │                 │  │                 │  │                 │            │
+│   │ - Créer         │  │ - Upload        │  │ - Créer admin   │            │
+│   │ - Modifier      │  │ - Renommer      │  │ - Changer MDP   │            │
+│   │ - Supprimer     │  │ - Supprimer     │  │                 │            │
+│   │ - Publier       │  │ - Activer       │  │                 │            │
+│   └─────────────────┘  └─────────────────┘  └─────────────────┘            │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-route"></i> Routes du Dashboard</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> routes/web.php (extrait)</span>
+                    </div>
+                    <pre><code class="language-php">// Routes admin protégées par le middleware
+Route::middleware(['admin.auth', 'admin.timeout'])->prefix('admin')->group(function () {
+    
+    // Dashboard principal
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // Gestion des actualités (CRUD complet)
+    Route::get('/news', [AdminController::class, 'index'])->name('admin.news.index');
+    Route::get('/news/create', [AdminController::class, 'create'])->name('admin.news.create');
+    Route::post('/news', [AdminController::class, 'store'])->name('admin.news.store');
+    Route::get('/news/{news}/edit', [AdminController::class, 'edit'])->name('admin.news.edit');
+    Route::put('/news/{news}', [AdminController::class, 'update'])->name('admin.news.update');
+    Route::delete('/news/{news}', [AdminController::class, 'destroy'])->name('admin.news.destroy');
+    
+    // Gestion des fichiers
+    Route::get('/files', [FileManagerController::class, 'index'])->name('admin.files.index');
+    Route::post('/files/upload', [FileManagerController::class, 'upload'])->name('admin.files.upload');
+    Route::delete('/files/{file}', [FileManagerController::class, 'delete'])->name('admin.files.delete');
+    
+    // Gestion des administrateurs
+    Route::get('/create-admin', [AuthController::class, 'showCreateAdmin'])->name('admin.create-admin');
+    Route::post('/store-admin', [AuthController::class, 'storeAdmin'])->name('admin.store-admin');
+    Route::get('/change-password', [AuthController::class, 'showChangePassword'])->name('admin.change-password');
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+});</code></pre>
+                </div>
+
+                <div class="info-box info">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="info-box-content">
+                        <h5>Comprendre prefix('admin')</h5>
+                        <p>
+                            <code>prefix('admin')</code> ajoute "/admin" devant toutes les routes du groupe.<br>
+                            Donc <code>Route::get('/dashboard')</code> devient <code>/admin/dashboard</code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé du Chapitre</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Le dashboard centralise toutes les fonctionnalités admin</li>
+                    <li><i class="fas fa-check"></i> Route::group() permet de regrouper des routes avec un préfixe commun</li>
+                    <li><i class="fas fa-check"></i> middleware() protège un groupe entier de routes</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 5: Gestion des Actualités (CRUD) -->
+        <article class="chapter" id="chapitre-5">
+            <div class="chapter-number">5</div>
+            <h2>Gestion des Actualités (CRUD)</h2>
+            <p class="chapter-intro">
+                CRUD signifie Create, Read, Update, Delete. Ce sont les 4 opérations de base 
+                pour gérer des données. On va les implémenter pour les actualités.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-plus-circle"></i> CREATE - Créer une actualité</h3>
+
+                <div class="steps">
+                    <div class="step">
+                        <h5>L'utilisateur accède au formulaire</h5>
+                        <p>Route GET <code>/admin/news/create</code> → affiche le formulaire vide</p>
+                    </div>
+                    <div class="step">
+                        <h5>L'utilisateur remplit et soumet</h5>
+                        <p>Le formulaire envoie les données en POST à <code>/admin/news</code></p>
+                    </div>
+                    <div class="step">
+                        <h5>Le contrôleur traite et enregistre</h5>
+                        <p>Validation des données → Création en BDD → Redirection</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> AdminController.php - Méthodes Create</span>
+                    </div>
+                    <pre><code class="language-php">// Affiche le formulaire de création
+public function create()
+{
+    return view('admin.news.create');
+}
+
+// Enregistre la nouvelle actualité
+public function store(Request $request)
+{
+    // 1. Valider les données
+    $request->validate([
+        'title' => 'required|max:255',
+        'content' => 'required',
+    ]);
+    
+    // 2. Créer l'actualité en BDD
+    News::create([
+        'title' => $request->title,
+        'content' => $request->content,
+        'is_published' => $request->has('is_published'),
+        'published_at' => now()
+    ]);
+    
+    // 3. Rediriger avec message de succès
+    return redirect()->route('admin.news.index')
+                     ->with('success', 'Actualité créée avec succès !');
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-list"></i> READ - Lister les actualités</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> AdminController.php - Méthode Index</span>
+                    </div>
+                    <pre><code class="language-php">// Liste toutes les actualités
+public function index()
+{
+    // Récupérer toutes les actualités, les plus récentes en premier
+    $news = News::orderBy('created_at', 'desc')->get();
+    
+    // Passer les données à la vue
+    return view('admin.news.index', compact('news'));
+}</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> resources/views/admin/news/index.blade.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;table class="table"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Titre&lt;/th&gt;
+            &lt;th&gt;Statut&lt;/th&gt;
+            &lt;th&gt;Date&lt;/th&gt;
+            &lt;th&gt;Actions&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        @foreach($news as $article)
+            &lt;tr&gt;
+                &lt;td&gt;{{ $article->title }}&lt;/td&gt;
+                &lt;td&gt;
+                    @if($article->is_published)
+                        &lt;span class="badge bg-success"&gt;Publié&lt;/span&gt;
+                    @else
+                        &lt;span class="badge bg-secondary"&gt;Brouillon&lt;/span&gt;
+                    @endif
+                &lt;/td&gt;
+                &lt;td&gt;{{ $article->created_at->format('d/m/Y') }}&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href="{{ route('admin.news.edit', $article) }}"&gt;Modifier&lt;/a&gt;
+                    &lt;!-- Bouton supprimer --&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        @endforeach
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-edit"></i> UPDATE - Modifier une actualité</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> AdminController.php - Méthodes Update</span>
+                    </div>
+                    <pre><code class="language-php">// Affiche le formulaire d'édition
+public function edit(News $news)  // Laravel injecte automatiquement l'objet !
+{
+    return view('admin.news.edit', compact('news'));
+}
+
+// Enregistre les modifications
+public function update(Request $request, News $news)
+{
+    // 1. Valider
+    $request->validate([
+        'title' => 'required|max:255',
+        'content' => 'required',
+    ]);
+    
+    // 2. Mettre à jour
+    $news->update([
+        'title' => $request->title,
+        'content' => $request->content,
+        'is_published' => $request->has('is_published')
+    ]);
+    
+    // 3. Rediriger
+    return redirect()->route('admin.news.index')
+                     ->with('success', 'Actualité modifiée !');
+}</code></pre>
+                </div>
+
+                <div class="info-box tip">
+                    <i class="fas fa-magic"></i>
+                    <div class="info-box-content">
+                        <h5>Route Model Binding</h5>
+                        <p>
+                            Quand tu écris <code>public function edit(News $news)</code>, Laravel fait automatiquement :<br>
+                            <code>$news = News::find($id)</code><br>
+                            C'est ce qu'on appelle le "Route Model Binding" - Laravel injecte l'objet directement !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-trash"></i> DELETE - Supprimer une actualité</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> AdminController.php - Méthode Delete</span>
+                    </div>
+                    <pre><code class="language-php">// Supprime une actualité
+public function destroy(News $news)
+{
+    $news->delete();
+    
+    return redirect()->route('admin.news.index')
+                     ->with('success', 'Actualité supprimée !');
+}</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> Bouton de suppression (dans la vue)</span>
+                    </div>
+                    <pre><code class="language-php">&lt;!-- Formulaire de suppression --&gt;
+&lt;form action="{{ route('admin.news.destroy', $article) }}" method="POST"&gt;
+    @csrf
+    @method('DELETE')  &lt;!-- Simule la méthode DELETE --&gt;
+    
+    &lt;button type="submit" onclick="return confirm('Êtes-vous sûr ?')"&gt;
+        Supprimer
+    &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="info-box-content">
+                        <h5>@method('DELETE')</h5>
+                        <p>
+                            Les formulaires HTML ne supportent que GET et POST.<br>
+                            <code>@method('DELETE')</code> crée un champ caché <code>_method=DELETE</code><br>
+                            Laravel le détecte et traite la requête comme un DELETE.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé CRUD</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> <strong>C</strong>reate : GET /create (formulaire) + POST /store (enregistrement)</li>
+                    <li><i class="fas fa-check"></i> <strong>R</strong>ead : GET /index (liste) + GET /show (détail)</li>
+                    <li><i class="fas fa-check"></i> <strong>U</strong>pdate : GET /edit (formulaire) + PUT /update (enregistrement)</li>
+                    <li><i class="fas fa-check"></i> <strong>D</strong>elete : DELETE /destroy</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 6: Gestionnaire de Fichiers -->
+        <article class="chapter" id="chapitre-6">
+            <div class="chapter-number">6</div>
+            <h2>Gestionnaire de Fichiers</h2>
+            <p class="chapter-intro">
+                Le gestionnaire de fichiers permet d'uploader, renommer et supprimer des fichiers 
+                (cours PDF, images, etc.) depuis le dashboard.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-upload"></i> Upload de Fichiers</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> FileManagerController.php - Upload</span>
+                    </div>
+                    <pre><code class="language-php">public function upload(Request $request)
+{
+    // 1. Valider le fichier
+    $request->validate([
+        'file' => 'required|file|max:65536', // Max 64 Mo
+        'category' => 'required'
+    ]);
+    
+    // 2. Récupérer le fichier
+    $file = $request->file('file');
+    
+    // 3. Générer un nom unique
+    $filename = time() . '_' . $file->getClientOriginalName();
+    
+    // 4. Déplacer le fichier
+    $path = $file->storeAs(
+        'public/uploads/' . $request->category,
+        $filename
+    );
+    
+    // 5. Enregistrer en BDD
+    File::create([
+        'filename' => $filename,
+        'original_name' => $file->getClientOriginalName(),
+        'category' => $request->category,
+        'path' => $path,
+        'size' => $file->getSize(),
+        'extension' => $file->getClientOriginalExtension(),
+        'uploaded_by' => session('admin_id')
+    ]);
+    
+    return back()->with('success', 'Fichier uploadé !');
+}</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-html5"></i> Formulaire d'upload</span>
+                    </div>
+                    <pre><code class="language-html">&lt;form action="{{ route('admin.files.upload') }}" method="POST" enctype="multipart/form-data"&gt;
+    @csrf
+    
+    &lt;!-- IMPORTANT: enctype="multipart/form-data" est obligatoire pour les fichiers ! --&gt;
+    
+    &lt;select name="category"&gt;
+        &lt;option value="cours"&gt;Cours&lt;/option&gt;
+        &lt;option value="projets"&gt;Projets&lt;/option&gt;
+        &lt;option value="logiciels"&gt;Logiciels&lt;/option&gt;
+    &lt;/select&gt;
+    
+    &lt;input type="file" name="file" required&gt;
+    
+    &lt;button type="submit"&gt;Uploader&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé du Chapitre</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> enctype="multipart/form-data" est obligatoire pour uploader des fichiers</li>
+                    <li><i class="fas fa-check"></i> $request->file('name') récupère le fichier uploadé</li>
+                    <li><i class="fas fa-check"></i> storeAs() déplace le fichier vers le dossier souhaité</li>
+                    <li><i class="fas fa-check"></i> Toujours valider la taille et le type de fichier</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 7: Sécurité -->
+        <article class="chapter" id="chapitre-7">
+            <div class="chapter-number">7</div>
+            <h2>Sécurité de l'Application</h2>
+            <p class="chapter-intro">
+                La sécurité est primordiale pour une application web. Voici les mesures 
+                qu'on a mises en place.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-key"></i> Hashage des Mots de Passe (bcrypt)</h3>
+                <p>
+                    On ne stocke <strong>JAMAIS</strong> un mot de passe en clair. On le "hache" avec bcrypt.
+                </p>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        HASHAGE BCRYPT                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  Mot de passe saisi: "admin123"
+           │
+           │  bcrypt()
+           ▼
+  Hash stocké: "$2y$12$0ZdDyzOzDnvgBDJBhzGPuOgRNCMBAMWQr/keo0vPH9j0Q1T.jiG3C"
+  
+  
+  ⚠️ IMPORTANT:
+  - Le hash est IRRÉVERSIBLE (on ne peut pas retrouver "admin123")
+  - Chaque hash est UNIQUE (même mot de passe = hash différent)
+  - Hash::check() compare sans révéler le mot de passe original
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> Création d'un admin avec mot de passe haché</span>
+                    </div>
+                    <pre><code class="language-php">// ❌ JAMAIS ça !
+AdminUser::create([
+    'username' => 'admin',
+    'password' => 'admin123'  // En clair = DANGER !
+]);
+
+// ✅ Toujours hasher !
+AdminUser::create([
+    'username' => 'admin',
+    'password' => bcrypt('admin123')  // Haché = Sécurisé !
+]);</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-clock"></i> Session Timeout (Déconnexion auto)</h3>
+                <p>
+                    Après 10 minutes d'inactivité, l'administrateur est automatiquement déconnecté.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-laravel"></i> app/Http/Middleware/AdminSessionTimeout.php</span>
+                    </div>
+                    <pre><code class="language-php">&lt;?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class AdminSessionTimeout
+{
+    protected $timeout = 600; // 10 minutes en secondes
+    
+    public function handle(Request $request, Closure $next)
+    {
+        // Récupérer le timestamp de la dernière activité
+        $lastActivity = session('last_activity');
+        
+        if ($lastActivity) {
+            // Calculer le temps écoulé
+            $elapsed = time() - $lastActivity;
+            
+            if ($elapsed > $this->timeout) {
+                // ⏰ Timeout ! Déconnecter l'utilisateur
+                session()->forget(['admin_id', 'admin_username', 'last_activity']);
+                
+                return redirect()->route('admin.login')
+                    ->with('error', 'Session expirée après 10 minutes d\'inactivité');
+            }
+        }
+        
+        // Mettre à jour le timestamp
+        session(['last_activity' => time()]);
+        
+        return $next($request);
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-shield-alt"></i> Protection CSRF</h3>
+                <p>
+                    CSRF (Cross-Site Request Forgery) est une attaque où un site malveillant 
+                    fait des requêtes à ton site en utilisant la session de l'utilisateur.
+                </p>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        ATTAQUE CSRF                                          │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  Sans protection CSRF:
+  
+  1. Admin connecté sur ton-site.com
+  2. Admin visite site-malveillant.com
+  3. Site malveillant contient:
+     &lt;form action="ton-site.com/admin/delete/5" method="POST"&gt;
+       &lt;input type="submit"&gt;
+     &lt;/form&gt;
+  4. ❌ L'actualité #5 est supprimée !
+  
+  
+  Avec protection CSRF (@csrf):
+  
+  1. Chaque formulaire a un token unique
+  2. Laravel vérifie ce token à chaque requête POST
+  3. Le site malveillant ne connaît pas le token
+  4. ✅ La requête est rejetée !
+</pre>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé Sécurité</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> bcrypt() pour hasher les mots de passe</li>
+                    <li><i class="fas fa-check"></i> Hash::check() pour vérifier les mots de passe</li>
+                    <li><i class="fas fa-check"></i> Session timeout après 10 min d'inactivité</li>
+                    <li><i class="fas fa-check"></i> @csrf obligatoire dans tous les formulaires POST</li>
+                    <li><i class="fas fa-check"></i> Middleware pour protéger les routes admin</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 8: Docker -->
+        <article class="chapter" id="chapitre-8">
+            <div class="chapter-number">8</div>
+            <h2>Containerisation avec Docker</h2>
+            <p class="chapter-intro">
+                Docker permet d'empaqueter l'application avec toutes ses dépendances dans des 
+                "containers". Le site fonctionne de la même façon partout !
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-question-circle"></i> C'est quoi Docker ?</h3>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      SANS DOCKER vs AVEC DOCKER                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  SANS DOCKER (galère) 😩                    AVEC DOCKER (tranquille) 😎
+  
+  ┌──────────────────────┐                   ┌──────────────────────┐
+  │    PC Développeur    │                   │    PC Développeur    │
+  │                      │                   │                      │
+  │ - Installer PHP 8.3  │                   │ - Installer Docker   │
+  │ - Installer MySQL    │                   │ - docker-compose up  │
+  │ - Installer Apache   │                   │                      │
+  │ - Configurer tout... │                   │ ✅ C'est prêt !      │
+  │ - "Ça marche pas"    │                   │                      │
+  └──────────────────────┘                   └──────────────────────┘
+  
+  ┌──────────────────────┐                   ┌──────────────────────┐
+  │    PC Production     │                   │    PC Production     │
+  │                      │                   │                      │
+  │ - Réinstaller tout   │                   │ - Installer Docker   │
+  │ - "Version PHP diff" │                   │ - docker-compose up  │
+  │ - "Config différente"│                   │                      │
+  │ - ❌ Ça marche pas ! │                   │ ✅ Même comportement │
+  └──────────────────────┘                   └──────────────────────┘
+</pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-file-code"></i> Le Dockerfile</h3>
+                <p>Le Dockerfile est la "recette" pour créer le container de l'application.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-docker"></i> Dockerfile</span>
+                    </div>
+                    <pre><code class="language-bash"># Image de base: PHP 8.3 avec Apache
+
+# Installer les extensions PHP nécessaires
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libzip-dev \
+    libonig-dev \
+    && docker-php-ext-install pdo_mysql mbstring gd zip
+
+# Activer le module Apache rewrite (pour Laravel)
+RUN a2enmod rewrite
+
+# Configurer Apache pour pointer vers /public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' \
+    /etc/apache2/sites-available/000-default.conf
+
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copier le projet
+WORKDIR /var/www/html
+COPY . .
+
+# Installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader
+
+# Permissions pour Laravel
+RUN chown -R www-data:www-data /var/www/html/storage
+RUN chmod -R 775 /var/www/html/storage
+
+# Exposer le port 80
+EXPOSE 80</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-layer-group"></i> Docker Compose</h3>
+                <p>Docker Compose orchestre plusieurs containers ensemble.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-docker"></i> docker-compose.yml</span>
+                    </div>
+                    <pre><code class="language-yaml">services:
+  # Container 1: Application Laravel
+  app:
+    build: .
+    container_name: bts-ciel-app
+    ports:
+      - "80:80"  # localhost:80 → container:80
+    volumes:
+      - ./public/img:/var/www/html/public/img
+    depends_on:
+      db:
+        condition: service_healthy
+    
+  # Container 2: Base de données MySQL
+  db:
+    image: mysql:8.0
+    container_name: bts-ciel-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_DATABASE: bts_ciel
+      MYSQL_USER: bts_user
+      MYSQL_PASSWORD: bts_secret
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  # Container 3: phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: bts-ciel-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+
+volumes:
+  mysql_data:</code></pre>
+                </div>
+
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         ARCHITECTURE DOCKER                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+                         docker-compose.yml
+                                │
+        ┌───────────────────────┼───────────────────────┐
+        │                       │                       │
+        ▼                       ▼                       ▼
+  ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+  │  bts-ciel-app │     │  bts-ciel-db  │     │ bts-ciel-pma  │
+  │               │     │               │     │               │
+  │  Laravel      │◄───►│  MySQL 8.0    │◄───►│  phpMyAdmin   │
+  │  PHP 8.3      │     │               │     │               │
+  │  Apache       │     │  bts_ciel     │     │               │
+  │               │     │               │     │               │
+  │  Port: 80     │     │  Port: 3306   │     │  Port: 8080   │
+  └───────────────┘     └───────────────┘     └───────────────┘
+        │                       │                       │
+        ▼                       ▼                       ▼
+  localhost:80          localhost:3306          localhost:8080
+</pre>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> Résumé Docker</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Docker empaquète l'application avec toutes ses dépendances</li>
+                    <li><i class="fas fa-check"></i> Dockerfile = recette pour créer un container</li>
+                    <li><i class="fas fa-check"></i> docker-compose.yml = orchestre plusieurs containers</li>
+                    <li><i class="fas fa-check"></i> "Ça marche sur ma machine" → "Ça marche partout" !</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 9: Déploiement -->
+        <article class="chapter" id="chapitre-9">
+            <div class="chapter-number">9</div>
+            <h2>Déploiement</h2>
+            <p class="chapter-intro">
+                Voici comment déployer l'application sur un nouveau serveur.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-server"></i> Étapes de Déploiement</h3>
+
+                <div class="steps">
+                    <div class="step">
+                        <h5>Exporter la base de données (PC actuel)</h5>
+                        <div class="code-block">
+                            <pre><code class="language-bash">docker-compose exec db mysqldump --no-tablespaces -u bts_user -pbts_secret bts_ciel > backup.sql</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h5>Copier le projet sur le nouveau serveur</h5>
+                        <p>Via clé USB, SCP, ou Git</p>
+                    </div>
+                    <div class="step">
+                        <h5>Installer Docker sur le serveur</h5>
+                        <div class="code-block">
+                            <pre><code class="language-bash"># Ubuntu/Debian
+sudo apt update
+sudo apt install docker.io docker-compose -y
+sudo systemctl start docker</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h5>Lancer les containers</h5>
+                        <div class="code-block">
+                            <pre><code class="language-bash">cd /chemin/vers/bts-ciel-laravel
+sudo docker-compose up -d</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h5>Importer la base de données</h5>
+                        <div class="code-block">
+                            <pre><code class="language-bash">sudo docker-compose exec -T db mysql -u bts_user -pbts_secret bts_ciel < backup.sql</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Chapitre 10: Commandes Utiles -->
+        <article class="chapter" id="chapitre-10">
+            <div class="chapter-number">10</div>
+            <h2>Commandes Utiles</h2>
+            <p class="chapter-intro">
+                Référence rapide des commandes les plus utilisées.
+            </p>
+
+            <div class="section">
+                <h3><i class="fab fa-laravel"></i> Commandes Laravel (Artisan)</h3>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>php artisan serve</code></td>
+                            <td>Lancer le serveur de développement</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan migrate</code></td>
+                            <td>Exécuter les migrations</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan migrate:fresh</code></td>
+                            <td>Supprimer toutes les tables et re-migrer</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan make:controller NomController</code></td>
+                            <td>Créer un contrôleur</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan make:model Nom -m</code></td>
+                            <td>Créer un modèle avec sa migration</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan make:middleware NomMiddleware</code></td>
+                            <td>Créer un middleware</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan route:list</code></td>
+                            <td>Lister toutes les routes</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan tinker</code></td>
+                            <td>Console interactive PHP</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan config:clear</code></td>
+                            <td>Vider le cache de configuration</td>
+                        </tr>
+                        <tr>
+                            <td><code>php artisan cache:clear</code></td>
+                            <td>Vider le cache</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3><i class="fab fa-docker"></i> Commandes Docker</h3>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>docker-compose up -d</code></td>
+                            <td>Démarrer les containers en arrière-plan</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose down</code></td>
+                            <td>Arrêter les containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose down -v</code></td>
+                            <td>Arrêter et supprimer les volumes</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose build --no-cache</code></td>
+                            <td>Reconstruire les images</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose ps</code></td>
+                            <td>Voir l'état des containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose logs -f</code></td>
+                            <td>Voir les logs en temps réel</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose exec app bash</code></td>
+                            <td>Entrer dans le container app</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose exec app php artisan ...</code></td>
+                            <td>Exécuter une commande Artisan dans le container</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-graduation-cap"></i> Félicitations !</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> J'ai appris à migrer un site HTML vers Laravel</li>
+                    <li><i class="fas fa-check"></i> J'ai compris l'architecture MVC</li>
+                    <li><i class="fas fa-check"></i> Je sais créer un système d'authentification sécurisé</li>
+                    <li><i class="fas fa-check"></i> Je maîtrises les opérations CRUD</li>
+                    <li><i class="fas fa-check"></i> Je sais containeriser avec Docker</li>
+                    <li><i class="fas fa-check"></i> Je suis capable de déployer l'application !</li>
+                </ul>
+            </div>
+        </article>
+        <div class="d-flex justify-content-center">
+            <a href="experiencePro.html" class="btn btn-outline-dark btn-lg">
+                <i class="fas fa-arrow-left"></i> Retour aux Experiences professionnelles
+            </a>
+        </div>
+
+    </main>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // Syntax highlighting
+        hljs.highlightAll();
+
+        // Progress bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Active nav link
+        const chapters = document.querySelectorAll('.chapter');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            chapters.forEach(chapter => {
+                const sectionTop = chapter.offsetTop - 150;
+                if (scrollY >= sectionTop) {
+                    current = chapter.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                // Close sidebar on mobile
+                document.getElementById('sidebar').classList.remove('active');
+            });
+        });
+
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Docker & Migration</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Highlight.js pour le code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    
+    <style>
+        :root {
+            --primary: #2496ed;
+            --secondary: #0db7ed;
+            --accent: #384d54;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--light);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--dark);
+            color: white;
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .sidebar-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-header h3 i {
+            color: var(--secondary);
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        .nav-section {
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px 60px;
+            max-width: 1200px;
+        }
+
+        /* Chapter Styles */
+        .chapter {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+        }
+
+        .chapter-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .chapter h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .chapter-intro {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            color: var(--accent);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section h3 i {
+            color: var(--primary);
+        }
+
+        .section h4 {
+            color: #444;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--dark);
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-header span {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-header .file-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-header .file-icon i {
+            color: var(--secondary);
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            background: #1e293b !important;
+        }
+
+        .code-block pre code {
+            background: transparent !important;
+            color: #e2e8f0 !important;
+            display: block;
+            opacity: 1 !important;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e2e8f0 !important;
+            opacity: 1 !important;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .info-box i {
+            font-size: 1.3rem;
+            margin-top: 3px;
+        }
+
+        .info-box.tip {
+            background: #ecfdf5;
+            border-left: 4px solid var(--success);
+        }
+
+        .info-box.tip i { color: var(--success); }
+
+        .info-box.warning {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+        }
+
+        .info-box.warning i { color: var(--warning); }
+
+        .info-box.danger {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+        }
+
+        .info-box.danger i { color: var(--danger); }
+
+        .info-box.info {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-box.info i { color: var(--primary); }
+
+        .info-box-content h5 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .info-box-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Tables */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .custom-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background: white;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .custom-table code {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--danger);
+        }
+
+        /* Diagrams */
+        .diagram {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .diagram pre {
+            margin: 0;
+            white-space: pre;
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            margin: 25px 0;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+
+        .step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step h5 {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .summary-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summary-box li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .summary-box li i {
+            color: #86efac;
+            margin-top: 4px;
+        }
+
+        /* Progress Bar */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Comparison Cards */
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #eee;
+        }
+
+        .comparison-card.bad {
+            border-color: #fecaca;
+            background: #fef2f2;
+        }
+
+        .comparison-card.good {
+            border-color: #bbf7d0;
+            background: #f0fdf4;
+        }
+
+        .comparison-card h5 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .comparison-card.bad h5 { color: var(--danger); }
+        .comparison-card.good h5 { color: var(--success); }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .comparison-card li {
+            padding: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+
+            .progress-indicator {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: var(--primary);
+                color: white;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 12px;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+
+            .chapter {
+                padding: 30px 25px;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        @media print {
+            .sidebar, .progress-indicator, .menu-toggle {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .chapter {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fab fa-docker"></i> Cours Docker</h3>
+            <p>Comprendre Docker & la Migration</p>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Introduction</div>
+            <a href="#chapitre-0" class="nav-link active">
+                <i class="fas fa-home"></i> C'est quoi Docker ?
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Concepts</div>
+            <a href="#chapitre-1" class="nav-link">
+                <i class="fas fa-box"></i> Images & Containers
+            </a>
+            <a href="#chapitre-2" class="nav-link">
+                <i class="fas fa-file-code"></i> Dockerfile
+            </a>
+            <a href="#chapitre-3" class="nav-link">
+                <i class="fas fa-layer-group"></i> Docker Compose
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Migration</div>
+            <a href="#chapitre-4" class="nav-link">
+                <i class="fas fa-database"></i> Export BDD
+            </a>
+            <a href="#chapitre-5" class="nav-link">
+                <i class="fas fa-truck"></i> Transfert fichiers
+            </a>
+            <a href="#chapitre-6" class="nav-link">
+                <i class="fas fa-play"></i> Déploiement
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Référence</div>
+            <a href="#chapitre-7" class="nav-link">
+                <i class="fas fa-terminal"></i> Commandes utiles
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Chapitre 0: Introduction -->
+        <article class="chapter" id="chapitre-0">
+            <div class="chapter-number">0</div>
+            <h2>C'est quoi Docker ?</h2>
+            <p class="chapter-intro">
+                Docker permet d'empaqueter une application avec tout ce dont elle a besoin 
+                pour fonctionner dans des "containers". Le site fonctionne de la même façon partout !
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-question-circle"></i> Le Problème sans Docker</h3>
+                
+                <div class="comparison-row">
+                    <div class="comparison-card bad">
+                        <h5><i class="fas fa-times-circle"></i> Sans Docker</h5>
+                        <ul>
+                            <li>❌ "Ça marche sur mon PC mais pas chez toi"</li>
+                            <li>❌ Installer PHP, MySQL, Apache manuellement</li>
+                            <li>❌ Configurer tout un par un</li>
+                            <li>❌ Versions différentes = bugs</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card good">
+                        <h5><i class="fas fa-check-circle"></i> Avec Docker</h5>
+                        <ul>
+                            <li>✅ "Ça marche partout pareil"</li>
+                            <li>✅ Une seule commande pour tout</li>
+                            <li>✅ Configuration automatique</li>
+                            <li>✅ Mêmes versions garanties</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-lightbulb"></i> Analogie Simple</h3>
+                
+                <div class="info-box tip">
+                    <i class="fas fa-shipping-fast"></i>
+                    <div class="info-box-content">
+                        <h5>Docker = Container maritime 🚢</h5>
+                        <p>
+                            Imagine un container maritime : peu importe ce qu'il y a dedans, 
+                            il peut être transporté par bateau, camion ou train.<br><br>
+                            Docker c'est pareil : ton application est dans un "container" qui fonctionne 
+                            sur Windows, Linux, Mac... sans rien changer !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-project-diagram"></i> Architecture de ton Projet BTS CIEL</h3>
+                
+                <div class="diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         DOCKER COMPOSE                                       │
+│                    (Orchestre les containers)                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+        ┌───────────────────────────┼───────────────────────────┐
+        │                           │                           │
+        ▼                           ▼                           ▼
+  ┌───────────────┐         ┌───────────────┐         ┌───────────────┐
+  │  bts-ciel-app │         │  bts-ciel-db  │         │ bts-ciel-pma  │
+  │               │         │               │         │               │
+  │  🐘 PHP 8.3   │◄───────►│  🐬 MySQL 8.0 │◄───────►│  phpMyAdmin   │
+  │  🌐 Apache    │         │               │         │               │
+  │  📁 Laravel   │         │  📊 bts_ciel  │         │  Interface    │
+  │               │         │               │         │  graphique    │
+  │  Port: 80     │         │  Port: 3306   │         │  Port: 8080   │
+  └───────────────┘         └───────────────┘         └───────────────┘
+        │                           │                           │
+        ▼                           ▼                           ▼
+  localhost:80              localhost:3306              localhost:8080
+</pre>
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Docker = Empaqueter une application avec tout ce qu'il lui faut</li>
+                    <li><i class="fas fa-check"></i> Container = Boîte isolée qui contient l'application</li>
+                    <li><i class="fas fa-check"></i> "Ça marche sur ma machine" → "Ça marche partout"</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 1: Images & Containers -->
+        <article class="chapter" id="chapitre-1">
+            <div class="chapter-number">1</div>
+            <h2>Images & Containers</h2>
+            <p class="chapter-intro">
+                Comprendre la différence entre une Image et un Container, c'est comprendre Docker.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-clone"></i> Image vs Container</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Image 📀</th>
+                            <th>Container 📦</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>C'est un <strong>modèle</strong> (template)</td>
+                            <td>C'est une <strong>instance</strong> en cours d'exécution</td>
+                        </tr>
+                        <tr>
+                            <td>Comme un fichier ISO de Windows</td>
+                            <td>Comme Windows installé et lancé</td>
+                        </tr>
+                        <tr>
+                            <td>Ne change jamais (read-only)</td>
+                            <td>Peut être modifié, arrêté, relancé</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker images</code></td>
+                            <td><code>docker ps</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box info">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="info-box-content">
+                        <h5>Analogie</h5>
+                        <p>
+                            <strong>Image</strong> = Recette de cuisine 📖<br>
+                            <strong>Container</strong> = Le plat cuisiné 🍝<br><br>
+                            À partir d'une même recette, tu peux faire plusieurs plats identiques !
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-download"></i> Images Officielles utilisées</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Utilisation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>php:8.3-apache</code></td>
+                            <td>PHP 8.3 + Apache</td>
+                            <td>Serveur web PHP</td>
+                        </tr>
+                        <tr>
+                            <td><code>mysql:8.0</code></td>
+                            <td>MySQL 8.0</td>
+                            <td>Base de données</td>
+                        </tr>
+                        <tr>
+                            <td><code>phpmyadmin</code></td>
+                            <td>Interface graphique MySQL</td>
+                            <td>Administrer la BDD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Image = Modèle figé (recette)</li>
+                    <li><i class="fas fa-check"></i> Container = Instance en cours d'exécution (plat)</li>
+                    <li><i class="fas fa-check"></i> Une image peut créer plusieurs containers</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 2: Dockerfile -->
+        <article class="chapter" id="chapitre-2">
+            <div class="chapter-number">2</div>
+            <h2>Le Dockerfile</h2>
+            <p class="chapter-intro">
+                Le Dockerfile est la "recette" pour construire ta propre image Docker personnalisée.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-file-code"></i> Le Dockerfile du projet BTS CIEL</h3>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-docker"></i> Dockerfile</span>
+                    </div>
+                    <pre><code class="language-bash"># 1. Image de base (point de départ)
+FROM php:8.3-apache
+
+# 2. Installer des extensions PHP nécessaires
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql gd zip
+
+# 3. Activer le module Apache rewrite (pour Laravel)
+RUN a2enmod rewrite
+
+# 4. Configurer Apache pour pointer vers /public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' \
+    /etc/apache2/sites-available/000-default.conf
+
+# 5. Installer Composer (gestionnaire de dépendances PHP)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 6. Définir le dossier de travail
+WORKDIR /var/www/html
+
+# 7. Copier le projet dans le container
+COPY . .
+
+# 8. Installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader
+
+# 9. Donner les permissions à Apache
+RUN chown -R www-data:www-data /var/www/html/storage
+
+# 10. Exposer le port 80
+EXPOSE 80</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-list-ol"></i> Explication des instructions</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Instruction</th>
+                            <th>Explication</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>FROM</code></td>
+                            <td>Image de base sur laquelle on construit</td>
+                        </tr>
+                        <tr>
+                            <td><code>RUN</code></td>
+                            <td>Exécute une commande pendant la construction</td>
+                        </tr>
+                        <tr>
+                            <td><code>COPY</code></td>
+                            <td>Copie des fichiers de ton PC vers l'image</td>
+                        </tr>
+                        <tr>
+                            <td><code>WORKDIR</code></td>
+                            <td>Définit le dossier de travail par défaut</td>
+                        </tr>
+                        <tr>
+                            <td><code>EXPOSE</code></td>
+                            <td>Indique quel port le container utilise</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Dockerfile = Recette pour créer une image</li>
+                    <li><i class="fas fa-check"></i> FROM = Point de départ</li>
+                    <li><i class="fas fa-check"></i> RUN = Commandes d'installation</li>
+                    <li><i class="fas fa-check"></i> COPY = Copier tes fichiers</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 3: Docker Compose -->
+        <article class="chapter" id="chapitre-3">
+            <div class="chapter-number">3</div>
+            <h2>Docker Compose</h2>
+            <p class="chapter-intro">
+                Docker Compose permet de gérer plusieurs containers ensemble avec un seul fichier.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-question-circle"></i> Pourquoi Docker Compose ?</h3>
+                
+                <div class="comparison-row">
+                    <div class="comparison-card bad">
+                        <h5><i class="fas fa-times-circle"></i> Sans Docker Compose</h5>
+                        <p style="font-family: monospace; font-size: 0.85rem;">
+                            docker run -d --name app ...<br>
+                            docker run -d --name db ...<br>
+                            docker run -d --name pma ...<br>
+                            docker network create ...<br>
+                            docker network connect ...
+                        </p>
+                        <p>😵 Trop de commandes !</p>
+                    </div>
+                    <div class="comparison-card good">
+                        <h5><i class="fas fa-check-circle"></i> Avec Docker Compose</h5>
+                        <p style="font-family: monospace; font-size: 0.85rem;">
+                            docker-compose up -d
+                        </p>
+                        <p>😎 Une seule commande !</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-file-alt"></i> Le fichier docker-compose.yml</h3>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fab fa-docker"></i> docker-compose.yml</span>
+                    </div>
+                    <pre><code class="language-yaml">services:
+  # Container 1 : Application Laravel
+  app:
+    build: .                          # Construit depuis le Dockerfile
+    container_name: bts-ciel-app
+    ports:
+      - "80:80"                        # Port local:port container
+    volumes:
+      - ./public/img:/var/www/html/public/img
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Container 2 : Base de données MySQL
+  db:
+    image: mysql:8.0
+    container_name: bts-ciel-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_DATABASE: bts_ciel
+      MYSQL_USER: bts_user
+      MYSQL_PASSWORD: bts_secret_2024
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Container 3 : phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: bts-ciel-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-terminal"></i> Commandes Docker Compose</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>docker-compose up -d</code></td>
+                            <td>Lancer tous les containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose up -d --build</code></td>
+                            <td>Lancer + reconstruire les images</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose down</code></td>
+                            <td>Arrêter tous les containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose ps</code></td>
+                            <td>Voir l'état des containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose logs</code></td>
+                            <td>Voir les logs</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose exec app bash</code></td>
+                            <td>Entrer dans le container app</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> docker-compose.yml = Configuration de tous les containers</li>
+                    <li><i class="fas fa-check"></i> <code>docker-compose up -d</code> = Tout lancer</li>
+                    <li><i class="fas fa-check"></i> <code>docker-compose down</code> = Tout arrêter</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 4: Export BDD -->
+        <article class="chapter" id="chapitre-4">
+            <div class="chapter-number">4</div>
+            <h2>Exporter la Base de Données</h2>
+            <p class="chapter-intro">
+                Avant de migrer, il faut exporter les données de MySQL dans un fichier .sql.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-database"></i> La commande mysqldump</h3>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="file-icon"><i class="fas fa-terminal"></i> Terminal (PC source)</span>
+                    </div>
+                    <pre><code class="language-bash"># Se placer dans le dossier du projet
+cd C:\wamp64\www\bts-ciel-laravel
+
+# Exporter la base de données
+docker-compose exec db mysqldump --no-tablespaces -u bts_user -pbts_secret_2024 bts_ciel > backup.sql</code></pre>
+                </div>
+
+                <h4>Décortiquons cette commande :</h4>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Partie</th>
+                            <th>Signification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>docker-compose exec db</code></td>
+                            <td>Exécute une commande dans le container "db"</td>
+                        </tr>
+                        <tr>
+                            <td><code>mysqldump</code></td>
+                            <td>Outil pour exporter une BDD MySQL</td>
+                        </tr>
+                        <tr>
+                            <td><code>-u bts_user</code></td>
+                            <td>Utilisateur MySQL</td>
+                        </tr>
+                        <tr>
+                            <td><code>-pbts_secret_2024</code></td>
+                            <td>Mot de passe (collé au -p !)</td>
+                        </tr>
+                        <tr>
+                            <td><code>bts_ciel</code></td>
+                            <td>Nom de la base de données</td>
+                        </tr>
+                        <tr>
+                            <td><code>> backup.sql</code></td>
+                            <td>Redirige vers un fichier</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> <code>mysqldump</code> = Outil pour exporter une BDD</li>
+                    <li><i class="fas fa-check"></i> Le fichier .sql contient la structure + les données</li>
+                    <li><i class="fas fa-check"></i> Toujours vérifier que le fichier n'est pas vide !</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 5: Transfert fichiers -->
+        <article class="chapter" id="chapitre-5">
+            <div class="chapter-number">5</div>
+            <h2>Transfert des Fichiers</h2>
+            <p class="chapter-intro">
+                Comment copier ton projet vers le nouveau PC/serveur.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-usb"></i> Via Clé USB / Disque externe</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <h5>Sur le PC source (Windows)</h5>
+                        <p>Copie tout le dossier <code>bts-ciel-laravel</code> sur ta clé USB / disque externe</p>
+                    </div>
+                    <div class="step">
+                        <h5>Sur le PC destination (Linux)</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal Linux</span>
+                            </div>
+                            <pre><code class="language-bash"># Copier depuis le disque externe
+sudo cp -r "/media/user/MON_DISQUE/bts-ciel-laravel" /var/www/
+
+# Donner les permissions
+sudo chown -R $USER:$USER /var/www/bts-ciel-laravel</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-folder-open"></i> Ce qu'il faut copier</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Élément</th>
+                            <th>Fichier/Dossier</th>
+                            <th>Contient</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>📁 Code source</td>
+                            <td>Tout le dossier</td>
+                            <td>PHP, Blade, routes...</td>
+                        </tr>
+                        <tr>
+                            <td>🐬 Base de données</td>
+                            <td><code>backup.sql</code></td>
+                            <td>Actualités, fichiers, admins</td>
+                        </tr>
+                        <tr>
+                            <td>🖼️ Images</td>
+                            <td><code>public/img/</code></td>
+                            <td>Photos, fichiers uploadés</td>
+                        </tr>
+                        <tr>
+                            <td>⚙️ Configuration</td>
+                            <td><code>.env</code>, <code>docker-compose.yml</code></td>
+                            <td>Paramètres</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Copier tout le dossier du projet</li>
+                    <li><i class="fas fa-check"></i> Ne pas oublier backup.sql !</li>
+                    <li><i class="fas fa-check"></i> Donner les permissions avec <code>chown</code></li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 6: Déploiement -->
+        <article class="chapter" id="chapitre-6">
+            <div class="chapter-number">6</div>
+            <h2>Déploiement sur Linux</h2>
+            <p class="chapter-intro">
+                Les étapes pour lancer ton application sur le nouveau PC Linux.
+            </p>
+
+            <div class="section">
+                <h3><i class="fas fa-list-ol"></i> Étapes complètes</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <h5>Installer Docker</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fab fa-linux"></i> Terminal Linux</span>
+                            </div>
+                            <pre><code class="language-bash">sudo apt update
+sudo apt install docker.io docker-compose -y
+sudo systemctl start docker</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Copier le projet depuis le disque externe</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">sudo cp -r "/media/user/MON_DISQUE/bts-ciel-laravel" /var/www/
+sudo chown -R $USER:$USER /var/www/bts-ciel-laravel</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Aller dans le dossier</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">cd /var/www/bts-ciel-laravel</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Lancer Docker Compose</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">sudo docker-compose up -d --build</code></pre>
+                        </div>
+                        <p>⏳ Attends 2-5 minutes...</p>
+                    </div>
+
+                    <div class="step">
+                        <h5>Vérifier que ça tourne</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">sudo docker-compose ps
+
+# Tu dois voir 3 containers "Up"</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Attendre 30 secondes</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">sleep 30</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Importer la base de données</h5>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="file-icon"><i class="fas fa-terminal"></i> Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">sudo docker-compose exec -T db mysql -u bts_user -pbts_secret_2024 bts_ciel < backup.sql</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h5>Tester ! 🎉</h5>
+                        <table class="custom-table">
+                            <tr>
+                                <td><code>http://localhost</code></td>
+                                <td>→ Site BTS CIEL</td>
+                            </tr>
+                            <tr>
+                                <td><code>http://localhost/admin/login</code></td>
+                                <td>→ Dashboard admin</td>
+                            </tr>
+                            <tr>
+                                <td><code>http://localhost:8080</code></td>
+                                <td>→ phpMyAdmin</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-bug"></i> Problèmes courants</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Erreur</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Permission denied"</td>
+                            <td>Ajoute <code>sudo</code> devant la commande</td>
+                        </tr>
+                        <tr>
+                            <td>"docker-compose: command not found"</td>
+                            <td>Essaie <code>docker compose</code> (sans tiret)</td>
+                        </tr>
+                        <tr>
+                            <td>"Port 80 already in use"</td>
+                            <td><code>sudo systemctl stop apache2</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-bookmark"></i> À retenir</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Installer Docker en premier</li>
+                    <li><i class="fas fa-check"></i> <code>docker-compose up -d --build</code> pour lancer</li>
+                    <li><i class="fas fa-check"></i> Attendre 30 sec avant d'importer la BDD</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Chapitre 7: Commandes utiles -->
+        <article class="chapter" id="chapitre-7">
+            <div class="chapter-number">7</div>
+            <h2>Commandes Utiles</h2>
+            <p class="chapter-intro">
+                Référence rapide des commandes Docker.
+            </p>
+
+            <div class="section">
+                <h3><i class="fab fa-docker"></i> Docker Compose</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>docker-compose up -d</code></td>
+                            <td>Lancer tous les containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose up -d --build</code></td>
+                            <td>Lancer + reconstruire</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose down</code></td>
+                            <td>Arrêter tous les containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose ps</code></td>
+                            <td>Voir l'état</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose logs</code></td>
+                            <td>Voir les logs</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose exec app bash</code></td>
+                            <td>Entrer dans le container</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose restart</code></td>
+                            <td>Redémarrer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3><i class="fas fa-database"></i> MySQL (dans Docker)</h3>
+                
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>docker-compose exec db mysqldump ... > backup.sql</code></td>
+                            <td>Exporter la BDD</td>
+                        </tr>
+                        <tr>
+                            <td><code>docker-compose exec -T db mysql ... < backup.sql</code></td>
+                            <td>Importer la BDD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h4><i class="fas fa-graduation-cap"></i> Félicitations !</h4>
+                <ul>
+                    <li><i class="fas fa-check"></i> Tu comprends ce qu'est Docker</li>
+                    <li><i class="fas fa-check"></i> Tu sais différencier Image et Container</li>
+                    <li><i class="fas fa-check"></i> Tu peux lire un Dockerfile et docker-compose.yml</li>
+                    <li><i class="fas fa-check"></i> Tu sais migrer une application Docker</li>
+                    <li><i class="fas fa-check"></i> Tu connais les commandes essentielles</li>
+                </ul>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        const chapters = document.querySelectorAll('.chapter');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            chapters.forEach(chapter => {
+                const sectionTop = chapter.offsetTop - 150;
+                if (scrollY >= sectionTop) {
+                    current = chapter.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.getElementById('sidebar').classList.remove('active');
+            });
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projet Stage BTS CIEL - Développement d'un site web Laravel avec Dashboard Admin">
+    <meta name="author" content="Fahel Brik-Kettou">
+    <title>Projet BTS CIEL - Fahel Brik-Kettou</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-code"></i> Fahel Brik-Kettou
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cv.html">CV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="veille.html">Veille Technologique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projets.html">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="experiencePro.html">Experiences professionnelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-badge">
+                <i class="fas fa-briefcase"></i>
+                <span>Stage Professionnel</span>
+            </div>
+            <h1>Site Web BTS CIEL</h1>
+            <p class="lead">Refonte complète d'un site pédagogique avec Laravel, Dashboard administrateur sécurisé et déploiement Docker</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-building"></i>
+                    <span>Lycée Christophe Colomb, Sucy-en-Brie</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Janvier - Février 2025 (6 semaines)</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Développeur Full Stack</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contexte -->
+    <section class="context-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="context-card">
+                        <h3><i class="fas fa-building"></i> Contexte du Projet</h3>
+                        <p>Le Lycée Christophe Colomb disposait d'un site web statique pour la section BTS CIEL (Cybersécurité, Informatique et réseaux, Électronique). Ce site nécessitait une refonte complète pour moderniser son architecture et faciliter sa maintenance.</p>
+                        <p>Ma mission consistait à transformer ce site en une application web dynamique avec un système de gestion de contenu permettant aux enseignants de mettre à jour facilement les ressources pédagogiques.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="context-card">
+                        <h3><i class="fas fa-bullseye"></i> Objectifs</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Migrer l'ensemble des pages HTML statiques vers le framework Laravel</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Développer un dashboard administrateur complet et sécurisé</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Implémenter un système de gestion des actualités (CRUD)</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Créer un gestionnaire de fichiers pour les cours et projets</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Containeriser l'application avec Docker pour le déploiement</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Analyse & Conception (Use Case) -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Phase Préparatoire</span>
+                <h2 class="section-title">Analyse & Conception</h2>
+                <p class="section-subtitle">Modélisation UML avant le développement</p>
+            </div>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5">
+                    <div class="context-card">
+                        <h3><i class="fas fa-project-diagram"></i> Diagramme de Cas d'Utilisation</h3>
+                        <p>Avant de commencer le développement du site en Laravel, j'ai réalisé un <strong>diagramme de cas d'utilisation (Use Case)</strong> afin de formaliser l'ensemble des fonctionnalités prévues et de structurer ma réflexion.</p>
+                        <p>Ce diagramme m'a permis de présenter clairement mes idées à mon tuteur de stage, qui a pu suivre mon raisonnement et <strong>valider chaque fonctionnalité</strong> avant que je ne commence à coder. C'est une étape essentielle pour s'assurer que le développeur et le commanditaire partagent la même vision du projet.</p>
+                        
+                        <h5 class="mt-4" style="color: var(--text-primary, #333);"><i class="fas fa-users"></i> Acteurs identifiés</h5>
+                        <ul>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Client (visiteur)</strong> — Consulter les pages BTS, filtrer les catégories, consulter et télécharger les ressources pédagogiques</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Admin (enseignant)</strong> — S'authentifier, administrer le site, gérer les fichiers et les actualités, créer des comptes admin, modifier son mot de passe</span>
+                            </li>
+                        </ul>
+
+                        <h5 class="mt-4" style="color: var(--text-primary, #333);"><i class="fas fa-sitemap"></i> Relations modélisées</h5>
+                        <ul>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>« include »</strong> — L'administration du site inclut obligatoirement l'authentification et la déconnexion</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>« extends »</strong> — Les actions spécifiques (créer/supprimer actualités, téléverser/supprimer fichiers) étendent les cas d'utilisation principaux</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div style="background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid rgba(102, 126, 234, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 50px rgba(102,126,234,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 40px rgba(0,0,0,0.08)';">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <span style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">
+                                <i class="fas fa-project-diagram"></i> Diagramme Use Case — WinDesign
+                            </span>
+                        </div>
+                        <img src="useCase.png" alt="Diagramme de cas d'utilisation - Projet BTS CIEL" style="width: 100%; height: auto; border-radius: 10px; border: 1px solid #eee;">
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #888; font-style: italic;">
+                            <i class="fas fa-info-circle"></i> Réalisé avec WinDesign v24 — Version 1, créé le 3/11/2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Réalisations -->
+    <section class="realizations-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Travail Réalisé</span>
+                <h2 class="section-title">Mes Réalisations</h2>
+                <p class="section-subtitle">Les différentes étapes du développement</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Migration Laravel -->
+                <div class="col-lg-6">
+                    <div class="realization-card">
+                        <div class="realization-icon migration">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h4>Migration vers Laravel</h4>
+                        <p>Transformation complète du site statique en application MVC avec le framework Laravel et le moteur de templates Blade.</p>
+                        <ul class="realization-features list-unstyled">
+                            <li><i class="fas fa-chevron-right"></i> Migration de 35+ pages HTML vers Blade</li>
+                            <li><i class="fas fa-chevron-right"></i> Création d'un layout principal réutilisable</li>
+                            <li><i class="fas fa-chevron-right"></i> Mise en place du routage Laravel</li>
+                            <li><i class="fas fa-chevron-right"></i> Gestion des assets avec {{ asset() }}</li>
+                            <li><i class="fas fa-chevron-right"></i> Footer moderne et responsive</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dashboard Admin -->
+                <div class="col-lg-6">
+                    <div class="realization-card">
+                        <div class="realization-icon dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h4>Dashboard Administrateur</h4>
+                        <p>Développement d'une interface d'administration complète pour la gestion du contenu du site.</p>
+                        <ul class="realization-features list-unstyled">
+                            <li><i class="fas fa-chevron-right"></i> Interface intuitive et responsive</li>
+                            <li><i class="fas fa-chevron-right"></i> Gestion des actualités (Créer, Modifier, Supprimer)</li>
+                            <li><i class="fas fa-chevron-right"></i> Gestionnaire de fichiers (Upload, Renommer, Supprimer)</li>
+                            <li><i class="fas fa-chevron-right"></i> Création de nouveaux administrateurs</li>
+                            <li><i class="fas fa-chevron-right"></i> Modification du mot de passe</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sécurité -->
+                <div class="col-lg-6">
+                    <div class="realization-card">
+                        <div class="realization-icon security">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Sécurité Renforcée</h4>
+                        <p>Mise en place de mesures de sécurité robustes pour protéger l'accès administrateur.</p>
+                        <ul class="realization-features list-unstyled">
+                            <li><i class="fas fa-chevron-right"></i> Hashage des mots de passe avec bcrypt</li>
+                            <li><i class="fas fa-chevron-right"></i> Session timeout après 10 min d'inactivité</li>
+                            <li><i class="fas fa-chevron-right"></i> Middleware d'authentification personnalisé</li>
+                            <li><i class="fas fa-chevron-right"></i> Protection CSRF sur les formulaires</li>
+                            <li><i class="fas fa-chevron-right"></i> Validation des données côté serveur</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Docker -->
+                <div class="col-lg-6">
+                    <div class="realization-card">
+                        <div class="realization-icon docker">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <h4>Containerisation Docker</h4>
+                        <p>Configuration complète pour le déploiement de l'application en environnement de production.</p>
+                        <ul class="realization-features list-unstyled">
+                            <li><i class="fas fa-chevron-right"></i> Dockerfile optimisé (PHP 8.3 + Apache)</li>
+                            <li><i class="fas fa-chevron-right"></i> docker-compose avec 3 services</li>
+                            <li><i class="fas fa-chevron-right"></i> Container MySQL 8.0 avec persistance</li>
+                            <li><i class="fas fa-chevron-right"></i> phpMyAdmin pour la gestion BDD</li>
+                            <li><i class="fas fa-chevron-right"></i> Scripts de déploiement automatisés</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Technologies -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-badge" style="background: rgba(255,255,255,0.2); color: white;">Stack Technique</span>
+                <h2 class="section-title" style="color: white;">Technologies Utilisées</h2>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-laravel"></i>
+                    <span>Laravel 11</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-php"></i>
+                    <span>PHP 8.3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database"></i>
+                    <span>MySQL 8.0</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-bootstrap"></i>
+                    <span>Bootstrap 5</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js"></i>
+                    <span>jQuery</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-docker"></i>
+                    <span>Docker</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-server"></i>
+                    <span>Apache</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>WinDesign (UML)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Architecture -->
+    <section class="architecture-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Infrastructure</span>
+                <h2 class="section-title">Architecture Docker</h2>
+                <p class="section-subtitle">Schéma de l'infrastructure containerisée</p>
+            </div>
+
+            <div class="architecture-diagram">
+                <div class="docker-schema">
+<pre>
+<span class="comment">┌─────────────────────────────────────────────────────────────────────────────┐</span>
+<span class="comment">│                              DOCKER COMPOSE                                  │</span>
+<span class="comment">├─────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="comment">│                                                                             │</span>
+<span class="comment">│   ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐       │</span>
+<span class="comment">│   │</span> <span class="service">bts-ciel-app</span>    <span class="comment">│    │</span> <span class="service">bts-ciel-db</span>     <span class="comment">│    │</span> <span class="service">bts-ciel-pma</span>    <span class="comment">│       │</span>
+<span class="comment">│   │                 │    │                 │    │                 │       │</span>
+<span class="comment">│   │  Laravel 11     │</span><span class="arrow">◄──►</span><span class="comment">│  MySQL 8.0      │</span><span class="arrow">◄──►</span><span class="comment">│  phpMyAdmin     │       │</span>
+<span class="comment">│   │  PHP 8.3        │    │                 │    │                 │       │</span>
+<span class="comment">│   │  Apache         │    │  Base: bts_ciel │    │                 │       │</span>
+<span class="comment">│   │                 │    │                 │    │                 │       │</span>
+<span class="comment">│   │  Port:</span> <span class="port">80</span>       <span class="comment">│    │  Port:</span> <span class="port">3306</span>     <span class="comment">│    │  Port:</span> <span class="port">8080</span>     <span class="comment">│       │</span>
+<span class="comment">│   └─────────────────┘    └─────────────────┘    └─────────────────┘       │</span>
+<span class="comment">│           │                      │                      │                 │</span>
+<span class="comment">│           │                      │                      │                 │</span>
+<span class="comment">│   ┌───────▼──────────────────────▼──────────────────────▼───────┐         │</span>
+<span class="comment">│   │                     </span><span class="service">bts-ciel-network</span><span class="comment">                         │         │</span>
+<span class="comment">│   │                    (Bridge Network)                         │         │</span>
+<span class="comment">│   └─────────────────────────────────────────────────────────────┘         │</span>
+<span class="comment">│                                                                             │</span>
+<span class="comment">└─────────────────────────────────────────────────────────────────────────────┘</span>
+
+<span class="comment">Volumes persistants:</span>
+  <span class="arrow">►</span> <span class="service">mysql_data</span>      <span class="comment">→ /var/lib/mysql (données MySQL)</span>
+  <span class="arrow">►</span> <span class="service">./public/img</span>    <span class="comment">→ /var/www/html/public/img (images du site)</span>
+</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Résultats -->
+    <section class="results-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Bilan</span>
+                <h2 class="section-title">Résultats du Projet</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="result-card">
+                        <div class="result-number">35+</div>
+                        <div class="result-label">Pages migrées</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="result-card">
+                        <div class="result-number">5</div>
+                        <div class="result-label">Tables MySQL</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="result-card">
+                        <div class="result-number">3</div>
+                        <div class="result-label">Containers Docker</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="result-card">
+                        <div class="result-number">10</div>
+                        <div class="result-label">Fonctionnalités admin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences Acquises -->
+    <section class="skills-acquired-section" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Apprentissage</span>
+                <h2 class="section-title">Compétences Acquises</h2>
+                <p class="section-subtitle">Ce que ce projet m'a permis de développer</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-code"></i> Développement Backend</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Architecture MVC</span>
+                            <span class="skill-tag">Laravel Blade</span>
+                            <span class="skill-tag">Eloquent ORM</span>
+                            <span class="skill-tag">Migrations</span>
+                            <span class="skill-tag">Middleware</span>
+                            <span class="skill-tag">Routes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-shield-alt"></i> Sécurité Web</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Authentification</span>
+                            <span class="skill-tag">Hashage bcrypt</span>
+                            <span class="skill-tag">Session Management</span>
+                            <span class="skill-tag">Protection CSRF</span>
+                            <span class="skill-tag">Validation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-category">
+                        <h4><i class="fab fa-docker"></i> DevOps</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Docker Compose</span>
+                            <span class="skill-tag">Containerisation</span>
+                            <span class="skill-tag">Volumes</span>
+                            <span class="skill-tag">Networks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-drafting-compass"></i> Analyse & Conception</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Diagramme Use Case</span>
+                            <span class="skill-tag">Modélisation UML</span>
+                            <span class="skill-tag">WinDesign</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">phpMyAdmin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h3>Intéressé par mon travail ?</h3>
+            <p>N'hésitez pas à me contacter pour discuter de vos projets ou pour une opportunité d'alternance.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="projets.html" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-arrow-left"></i> Retour aux Projets
+                </a>
+                <a href="explication.html" class="btn btn-light btn-lg">
+                    <i class="fa fa-user-secret"></i> Explication
+                </a>
+                <a href="contact.html" class="btn btn-light btn-lg">
+                    <i class="fas fa-envelope"></i> Me Contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3>
+                    <p>Développeur Web & Applicatif</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p>
+                <p class="footer-tech">
+                    Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+
+            // Animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Apply animation to cards
+            document.querySelectorAll('.realization-card, .context-card, .tech-item, .result-card, .skill-category').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Counter animation for results
+            const animateCounter = (element, target) => {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + (element.dataset.suffix || '');
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+                    }
+                }, 30);
+            };
+
+            // Trigger counter animation when visible
+            const resultObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const number = entry.target.querySelector('.result-number');
+                        const value = parseInt(number.textContent);
+                        if (!number.dataset.animated) {
+                            number.dataset.animated = true;
+                            animateCounter(number, value);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.result-card').forEach(el => {
+                resultObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Fahel Brik-Kettou - Étudiant en BTS SIO, Développeur Web & Applicatif">
+    <meta name="author" content="Fahel Brik-Kettou">
+    <title>Portfolio - Fahel Brik-Kettou</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-code"></i> Fahel Brik-Kettou
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cv.html">CV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="veille.html">Veille Technologique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projets.html">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="experiencePro.html">Experiences professionnelles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Développeur en Formation</span>
+                </div>
+                <h1 class="display-3">Fahel Brik-Kettou</h1>
+                <p class="lead">Développeur Informatique en alternance (BTS SIO)</p>
+                <p class="hero-description">Actuellement en 2ème année de BTS SIO, je maîtrise la stack PHP/SQL et le framework Bootstrap. Passionné par le développement web et à la recherche de nouvelles opportunités pour créer des solutions innovantes.</p>
+                <div class="hero-buttons">
+                    <a href="cv.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-file-alt"></i> Mon CV
+                    </a>
+                    <a href="projets.html" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-briefcase"></i> Mes Projets
+                    </a>
+                    <a href="veille.html" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-search"></i> Ma Veille
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10;">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À Propos -->
+    <section class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="about-image-container">
+                        <img src="ppcv.jpg" alt="Fahel Brik-Kettou" style="width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 6px solid #667eea; box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3); opacity: 1 !important; position: relative; z-index: 1;">
+                        <div class="floating-card card-1" style="z-index: 10;">
+                            <i class="fas fa-code"></i>
+                            <span>Clean Code</span>
+                        </div>
+                        <div class="floating-card card-2" style="z-index: 10;">
+                            <i class="fas fa-rocket"></i>
+                            <span>Innovation</span>
+                        </div>
+                        <div class="floating-card card-3" style="z-index: 10;">
+                            <i class="fas fa-users"></i>
+                            <span>Travail d'équipe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-header">
+                        <span class="section-badge">Présentation</span>
+                        <h2 class="section-title">À Propos de Moi</h2>
+                    </div>
+                    <p class="lead-text">Passionné de sport et de cinéma, je possède un excellent sens du contact.</p>
+                    <p class="about-text">Ma capacité d'apprentissage rapide me permet d'être immédiatement opérationnel et polyvalent en équipe. Perfectionniste dans mon travail, j'apprécie les défis techniques et les moments de collaboration.</p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h5>Formation</h5>
+                                <p>BTS SIO - 2ème année</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h5>Localisation</h5>
+                                <p>Ivry-Sur-Seine, 94200</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h5>Langues</h5>
+                                <p>Anglais (B2), Allemand (B1)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="cv.html" class="btn btn-primary btn-action me-2">
+                            <i class="fas fa-file-download"></i> Voir mon CV
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-primary btn-action">
+                            <i class="fas fa-envelope"></i> Me Contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences Techniques -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center mb-4">
+                <span class="section-badge">Expertise</span>
+                <h3 class="section-title">Mes Compétences Techniques</h3>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <!-- Maîtrisé -->
+                    <div class="skill-level-group mb-4">
+                        <h5 class="skill-level-title"><i class="fas fa-star text-warning"></i> Maîtrisé</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <span class="skill-tag expert">HTML/CSS</span>
+                            <span class="skill-tag expert">Bootstrap</span>
+                            <span class="skill-tag expert">SQL</span>
+                            <span class="skill-tag expert">C#</span>
+                            <span class="skill-tag expert">PHP</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Avancé -->
+                    <div class="skill-level-group mb-4">
+                        <h5 class="skill-level-title"><i class="fas fa-star-half-alt text-info"></i> Avancé</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <span class="skill-tag advanced">Laravel</span>
+                            <span class="skill-tag advanced">Python</span>
+                            <span class="skill-tag advanced">jQuery</span>
+                        </div>
+                    </div>
+                    
+                    <!-- En apprentissage -->
+                    <div class="skill-level-group">
+                        <h5 class="skill-level-title"><i class="fas fa-seedling text-success"></i> En progression</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <span class="skill-tag learning">Git/GitHub</span>
+                            <span class="skill-tag learning">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualités Personnelles -->
+            <div class="mt-5">
+                <div class="section-header text-center mb-4">
+                    <span class="section-badge">Soft Skills</span>
+                    <h3 class="section-title">Qualités Personnelles</h3>
+                </div>
+                <div class="skills-list d-flex flex-wrap justify-content-center gap-2">
+                    <span class="skill-badge-soft">Travail d'équipe</span>
+                    <span class="skill-badge-soft">Dynamique</span>
+                    <span class="skill-badge-soft">Communication</span>
+                    <span class="skill-badge-soft">Créativité</span>
+                    <span class="skill-badge-soft">Polyvalent</span>
+                    <span class="skill-badge-soft">Prévoyant</span>
+                    <span class="skill-badge-soft">Sportif</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Réalisations -->
+    <section class="projects-preview-section py-5">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-badge">Portfolio</span>
+                <h2 class="section-title">Réalisations Récentes</h2>
+                <p class="section-subtitle">Mes projets pédagogiques et professionnels</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Projet E-Commerce -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-preview-card">
+                        <div class="project-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4>Site E-Commerce</h4>
+                        <p class="project-duration"><i class="fas fa-clock"></i> Durée: 2 mois</p>
+                        <p>Développement d'un site e-commerce fonctionnel avec HTML, CSS, PHP et Laravel (architecture MVC).</p>
+                        <div class="project-tags">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                        <a href="projets.html" class="btn btn-sm btn-outline-primary mt-3">Voir le projet <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Sicily Lines -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-preview-card">
+                        <div class="project-icon">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <h4>Sicily Lines</h4>
+                        <p class="project-duration"><i class="fas fa-clock"></i> Durée: 2 mois</p>
+                        <p>Système de réservation de traversées maritimes avec application desktop C# et site web PHP Laravel.</p>
+                        <div class="project-tags">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                        <a href="projets.html" class="btn btn-sm btn-outline-primary mt-3">Voir le projet <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-preview-card">
+                        <div class="project-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4>Certifications OpenClassrooms</h4>
+                        <p class="project-duration"><i class="fas fa-clock"></i> Durée: 2 mois</p>
+                        <p>Formations complètes en développement web, gestion de code avec GitHub et bases Python.</p>
+                        <div class="project-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">GitHub</span>
+                            <span class="tech-tag">Web Dev</span>
+                        </div>
+                        <a href="projets.html" class="btn btn-sm btn-outline-primary mt-3">Voir plus <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="projets.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-folder-open"></i> Voir Tous Mes Projets
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Recherche Alternance -->
+    <section class="alternance-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="alternance-card">
+                        <div class="alternance-header">
+                            <div class="alternance-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <span class="badge bg-success">Disponible</span>
+                        </div>
+                        
+                        <h2 class="alternance-title">Recherche d'Alternance</h2>
+                        <h4 class="alternance-position">Développeur Informatique - BTS SIO (2ème année)</h4>
+                        
+                        <div class="alternance-intro">
+                            <p>Fort d'une expérience concrète en création d'outils web sécurisés et en gestion d'infrastructure matérielle, je souhaite mettre ma polyvalence technique au service de vos projets de développement.</p>
+                        </div>
+
+                        <div class="alternance-details">
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <strong>Période</strong>
+                                    <p>À partir de Septembre 2025</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Rythme</strong>
+                                    <p>Flexible (à définir)</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Localisation</strong>
+                                    <p>Ivry-Sur-Seine et région parisienne</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alternance-stack">
+                            <h5><i class="fas fa-code"></i> Stack Technique Maîtrisée</h5>
+                            <div class="stack-tags">
+                                <span class="stack-tag">PHP/SQL</span>
+                                <span class="stack-tag">Bootstrap</span>
+                                <span class="stack-tag">Laravel</span>
+                                <span class="stack-tag">Python</span>
+                                <span class="stack-tag">C#</span>
+                                <span class="stack-tag">jQuery</span>
+                                <span class="stack-tag">Git/GitHub</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="contact.html" class="btn btn-primary btn-lg btn-action">
+                                <i class="fas fa-paper-plane"></i> Me Contacter pour une Alternance
+                            </a>
+                            <a href="cv.html" class="btn btn-outline-primary btn-lg btn-action ms-2">
+                                <i class="fas fa-file-alt"></i> Consulter mon CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3>
+                    <p>Développeur Web & Applicatif</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p>
+                <p class="footer-tech">
+                    Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+
+            // Smooth scroll for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this.hash);
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 70
+                    }, 800);
+                }
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.skill-card, .about-highlights, .project-preview-card, .alternance-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Animation des barres de compétences
+            setTimeout(function() {
+                $('.skill-bar').each(function() {
+                    var width = $(this).css('width');
+                    $(this).css('width', '0');
+                    $(this).animate({
+                        width: width
+                    }, 1500, 'swing');
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
