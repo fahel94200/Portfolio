@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sources Supplémentaires - Veille Technologique IA & Sport">
+    <title>Sources Supplémentaires - Fahel Brik-Kettou</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .source-card {
+            background: var(--bg-card, #fff);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .source-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .source-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .source-card-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .source-card-icon.academic { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .source-card-icon.sectoral { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .source-card-icon.company { background: linear-gradient(135deg, #f093fb, #f5576c); }
+
+        .source-card-header h5 {
+            margin: 0;
+            font-size: 1.05rem;
+            color: var(--text-primary, #1a1a2e);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .source-card-date {
+            font-size: 0.8rem;
+            color: #667eea;
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .source-card p {
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .source-card .btn {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .source-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .source-category-badge.academic {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            color: #667eea;
+        }
+
+        .source-category-badge.sectoral {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
+            color: #4facfe;
+        }
+
+        .source-category-badge.company {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+            color: #f5576c;
+        }
+
+        .sources-counter {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .counter-item {
+            text-align: center;
+            padding: 1.25rem 2rem;
+            background: var(--bg-card, #fff);
+            border-radius: 16px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            min-width: 140px;
+        }
+
+        .counter-item .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .counter-item .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #6b7280);
+            margin-top: 0.25rem;
+        }
+
+        .back-to-veille {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-veille:hover {
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-code"></i> Fahel Brik-Kettou
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-bookmark"></i></div>
+                <h1>Sources Supplémentaires</h1>
+                <p class="lead">Toutes les ressources utilisées pour ma veille technologique sur l'IA et la prévention des blessures sportives</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compteurs -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="text-center mb-4">
+                <a href="veille.html" class="back-to-veille">
+                    <i class="fas fa-arrow-left"></i> Retour à la Veille Technologique
+                </a>
+            </div>
+
+            <div class="sources-counter">
+                <div class="counter-item">
+                    <div class="number">17</div>
+                    <div class="label">Sources totales</div>
+                </div>
+                <div class="counter-item">
+                    <div class="number">5</div>
+                    <div class="label">Articles académiques</div>
+                </div>
+                <div class="counter-item">
+                    <div class="number">6</div>
+                    <div class="label">Articles sectoriels</div>
+                </div>
+                <div class="counter-item">
+                    <div class="number">6</div>
+                    <div class="label">Acteurs du marché</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Académiques -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-badge">Recherche</span>
+                <h2 class="section-title">Articles Académiques & Recherches</h2>
+            </div>
+            <div class="text-center">
+                <span class="source-category-badge academic">
+                    <i class="fas fa-graduation-cap"></i> 5 publications scientifiques
+                </span>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon academic"><i class="fas fa-book"></i></div>
+                            <div>
+                                <h5>MDPI Bioengineering</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Août 2025</div>
+                            </div>
+                        </div>
+                        <p>Scoping review sur l'IA en biomécanique sportive. Analyse de 73 études (2015-2024) couvrant les wearables, l'analyse de mouvement et la prédiction de blessures via ML/DL.</p>
+                        <a href="https://www.mdpi.com/2306-5354/12/8/887" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon academic"><i class="fas fa-microscope"></i></div>
+                            <div>
+                                <h5>Scientific Reports (Nature)</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Novembre 2025</div>
+                            </div>
+                        </div>
+                        <p>Framework IA intégrant deep learning et modélisation biomécanique. BINN (Biomechanically-Informed Neural Network) pour fusion données kinématiques et physiologiques.</p>
+                        <a href="https://www.nature.com/articles/s41598-025-20580-y" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon academic"><i class="fas fa-file-medical"></i></div>
+                            <div>
+                                <h5>UC San Diego - GenAI</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Octobre 2025</div>
+                            </div>
+                        </div>
+                        <p>BIGE (Biomechanics-informed GenAI for Exercise Science). IA générative créant vidéos de mouvements optimaux pour entraînement et rééducation avec contraintes biomécaniques.</p>
+                        <a href="https://today.ucsd.edu/story/generative-ai-can-help-athletes-avoid-injuries" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon academic"><i class="fas fa-flask"></i></div>
+                            <div>
+                                <h5>Medium - Performance IA 2025</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Septembre 2025</div>
+                            </div>
+                        </div>
+                        <p>Analyse complète de la transformation IA dans le sport : NFL -17% commotions, Liverpool -30% jours perdus, LA FC -53% blessures. Zone7 avec 72% de précision sur 50+ clubs.</p>
+                        <a href="https://medium.com/@sobermanalex/smarter-faster-safer-how-ai-is-reinventing-athlete-performance-and-injury-prevention-in-2025-1f9dbb679060" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon academic"><i class="fas fa-dna"></i></div>
+                            <div>
+                                <h5>Playbook Sports</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Août 2025</div>
+                            </div>
+                        </div>
+                        <p>Top 5 méthodes IA pour prévention blessures : -40% blessures sans contact, -30% temps récupération, 85% précision prédiction. Analyse biomécanique, load management et wearables.</p>
+                        <a href="https://www.callplaybook.com/reports/top-5-methods-for-using-ai-to-predict-and-prevent-player-injuries" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Sectoriels -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-badge">Presse</span>
+                <h2 class="section-title">Articles Sectoriels & Médias</h2>
+            </div>
+            <div class="text-center">
+                <span class="source-category-badge sectoral">
+                    <i class="fas fa-newspaper"></i> 6 articles de presse spécialisée
+                </span>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-tv"></i></div>
+                            <div>
+                                <h5>NBC Washington - NFL IA</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Octobre 2025</div>
+                            </div>
+                        </div>
+                        <p>Digital Athlete avec 500 millions de points de données par semaine. 3ème saison pour les 32 équipes NFL. Témoignages des staffs Minnesota Vikings sur l'impact réel.</p>
+                        <a href="https://www.nbcwashington.com/news/sports/nfl/nfl-ai-predict-injuries-keep-players-healthier/4001576/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-hospital"></i></div>
+                            <div>
+                                <h5>SPRY - Médecine Sportive</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Décembre 2025</div>
+                            </div>
+                        </div>
+                        <p>Marché IA sport : de 1,03B$ (2024) à 26,94B$ (2030) avec un CAGR de 28,69%. Diagnostic +20% précision, prédiction 90%, récupération -15 à -25% temps.</p>
+                        <a href="https://www.sprypt.com/blog/ai-in-sports-medicine" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-cogs"></i></div>
+                            <div>
+                                <h5>Lasting Dynamics - IA 2025</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Août 2025</div>
+                            </div>
+                        </div>
+                        <p>Analytics sportif : de 4,79B$ (2024) à 24B$ (2032) avec un CAGR de 22,5%. L'Amérique du Nord représente 42% du marché. Prédiction via historique + métriques temps réel.</p>
+                        <a href="https://www.lastingdynamics.com/blog/ai-in-sports/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-chart-bar"></i></div>
+                            <div>
+                                <h5>WSC Sports - Coaching IA</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Novembre 2025</div>
+                            </div>
+                        </div>
+                        <p>Marché coaching IA évalué à 2,5B$. Zone7 : 72% précision sur 50+ clubs. Getafe -60% blessures. Liverpool -30% jours perdus. Transformation de l'élite sportive mondiale.</p>
+                        <a href="https://wsc-sports.com/blog/industry-insights/the-2-5b-secret-how-ai-coaching-is-transforming-elite-sports-performance/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-football-ball"></i></div>
+                            <div>
+                                <h5>FOX Sports - NFL & IA</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Octobre 2025</div>
+                            </div>
+                        </div>
+                        <p>Digital Athlete : données des 32 équipes, suivi de la charge de travail, évaluation du risque de blessure. Optimisation des programmes d'entraînement NFL.</p>
+                        <a href="https://www.foxsports.com/articles/nfl/nfl-uses-ai-to-predict-injuries-aiming-to-keep-players-healthier" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon sectoral"><i class="fas fa-newspaper"></i></div>
+                            <div>
+                                <h5>Washington Post - NFL</h5>
+                                <div class="source-card-date"><i class="fas fa-calendar"></i> Novembre 2025</div>
+                            </div>
+                        </div>
+                        <p>Comment la NFL utilise l'IA pour prédire les blessures. Du laboratoire en Virginie aux vestiaires. Digital Twins des joueurs via le partenariat AWS.</p>
+                        <a href="https://www.washingtonpost.com/sports/2025/11/05/nfl-ai-injuries/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acteurs du Marché -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-badge">Entreprises</span>
+                <h2 class="section-title">Acteurs & Plateformes du Marché</h2>
+            </div>
+            <div class="text-center">
+                <span class="source-category-badge company">
+                    <i class="fas fa-building"></i> 6 acteurs commerciaux clés
+                </span>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-shield-virus"></i></div>
+                            <div>
+                                <h5>Zone7</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Leader prédiction IA</div>
+                            </div>
+                        </div>
+                        <p>Plateforme de prédiction de blessures par IA. Précision validée de 72,4%. Plus de 50 clubs clients dont Getafe CF (-60% blessures). Tarif : 150 000 à 300 000€/an.</p>
+                        <a href="https://www.zone7.ai" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Visiter le site <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-satellite-dish"></i></div>
+                            <div>
+                                <h5>Catapult Sports</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Leader wearables GPS</div>
+                            </div>
+                        </div>
+                        <p>Capteurs GPS portables pour le suivi de performance. Clients : Bayern Munich, Chelsea, Dortmund. Offre pro (100 000€/an) et grand public Catapult One (180€/an).</p>
+                        <a href="https://www.catapult.com" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Visiter le site <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-database"></i></div>
+                            <div>
+                                <h5>Kitman Labs</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Plateforme Intelligence</div>
+                            </div>
+                        </div>
+                        <p>Hub centralisé de données athlètes avec insights Machine Learning. Présent en NFL, MLB, NHL et Rugby. Aide les staffs à prendre des décisions basées sur la data.</p>
+                        <a href="https://www.kitmanlabs.com" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Visiter le site <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-heartbeat"></i></div>
+                            <div>
+                                <h5>Sparta Science</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Plateformes de force</div>
+                            </div>
+                        </div>
+                        <p>Partenaire officiel de la NFL. Plateformes de force couplées à l'IA pour analyser les asymétries corporelles. Scores LOAD, EXPLODE et DRIVE pour chaque athlète.</p>
+                        <a href="https://www.spartascience.com" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Visiter le site <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-cloud"></i></div>
+                            <div>
+                                <h5>AWS / NFL Partnership</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Digital Athlete</div>
+                            </div>
+                        </div>
+                        <p>Partenariat entre Amazon Web Services et la NFL pour créer le Digital Athlete : jumeau numérique des joueurs. Résultat : -17% commotions en 2025 sur toute la ligue.</p>
+                        <a href="https://aws.amazon.com/sports/nfl/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            En savoir plus <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="source-card">
+                        <div class="source-card-header">
+                            <div class="source-card-icon company"><i class="fas fa-server"></i></div>
+                            <div>
+                                <h5>IBM AI Sports</h5>
+                                <div class="source-card-date"><i class="fas fa-tag"></i> Plateforme IA</div>
+                            </div>
+                        </div>
+                        <p>IBM Watson appliqué au sport : analyse de données avancée, prévision de performances et aide à la décision pour les équipes professionnelles et staffs médicaux.</p>
+                        <a href="https://www.ibm.com/new/product-blog/ai-sports-game" target="_blank" class="btn btn-outline-primary btn-sm">
+                            En savoir plus <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Retour -->
+    <section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container text-center">
+            <h3 style="color: white; margin-bottom: 1rem;">Retour à la Veille Technologique</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Retrouvez l'analyse complète avec les statistiques, les études de cas et les conclusions.</p>
+            <a href="veille.html" class="btn btn-light btn-lg">
+                <i class="fas fa-arrow-left"></i> Retour à la Veille
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3>
+                    <p>Développeur Web & Applicatif</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p>
+                <p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                $(this).scrollTop() > 50 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled');
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.source-card, .counter-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
