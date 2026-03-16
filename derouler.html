@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Déroulé de ma Veille Technologique - Fahel Brik-Kettou">
+    <title>Déroulé de la Veille - Fahel Brik-Kettou</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 4px solid var(--bg-main, #fff);
+            box-shadow: 0 0 0 3px #667eea;
+            z-index: 2;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 1.75rem;
+            background: var(--bg-card, #fff);
+            border-radius: 16px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.12);
+            border-color: rgba(102, 126, 234, 0.25);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-date.phase1 {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .timeline-date.phase2 {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+        }
+
+        .timeline-date.phase3 {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .timeline-content h4 {
+            color: var(--text-primary, #1a1a2e);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            background: rgba(102, 126, 234, 0.08);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.15);
+        }
+
+        .definition-card {
+            background: var(--bg-card, #fff);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .definition-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .definition-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.08);
+        }
+
+        .key-point i {
+            color: #667eea;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .key-point span {
+            font-size: 0.9rem;
+            color: var(--text-secondary, #6b7280);
+            line-height: 1.5;
+        }
+
+        .mdpi-card {
+            background: var(--bg-card, #fff);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mdpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #4facfe);
+        }
+
+        .mdpi-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .mdpi-stat {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 1.25rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.12);
+        }
+
+        .mdpi-stat .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .mdpi-stat .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary, #6b7280);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 55px) !important;
+                margin-left: 55px !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 55px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-code"></i> Fahel Brik-Kettou
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-route"></i></div>
+                <h1>Déroulé de ma Veille</h1>
+                <p class="lead">Comment j'ai construit et structuré ma veille technologique sur l'IA et la prévention des blessures sportives</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 : Définition -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="definition-card">
+                        <div class="definition-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h3 style="color: var(--text-primary, #1a1a2e); margin-bottom: 1rem; font-weight: 700;">Qu'est-ce qu'une Veille Technologique ?</h3>
+                        <p style="color: var(--text-secondary, #6b7280); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+                            La veille technologique est un <strong>processus continu et organisé</strong> de surveillance des évolutions, innovations et tendances dans un domaine technologique précis. Elle consiste à collecter, analyser et exploiter l'information afin de rester informé des dernières avancées et d'anticiper les changements à venir.
+                        </p>
+                        <p style="color: var(--text-secondary, #6b7280); font-size: 1.05rem; line-height: 1.8;">
+                            En <strong>BTS SIO</strong>, la veille technologique est une compétence essentielle évaluée lors de l'examen. Elle démontre la capacité de l'étudiant à se tenir informé de manière autonome et à analyser les impacts des nouvelles technologies sur son domaine professionnel.
+                        </p>
+
+                        <div class="key-points">
+                            <div class="key-point">
+                                <i class="fas fa-eye"></i>
+                                <span><strong>Surveiller</strong> — Identifier et suivre les sources d'information pertinentes de manière régulière</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="fas fa-filter"></i>
+                                <span><strong>Collecter</strong> — Rassembler les informations utiles en les filtrant et en les organisant</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="fas fa-brain"></i>
+                                <span><strong>Analyser</strong> — Comprendre et interpréter les informations pour en tirer des conclusions</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="fas fa-share-alt"></i>
+                                <span><strong>Diffuser</strong> — Partager les résultats de sa veille de manière claire et structurée</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 & 3 : Timeline du déroulé -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Méthodologie</span>
+                <h2 class="section-title">Le Déroulé de ma Veille</h2>
+                <p class="section-subtitle">De la curiosité initiale à la structuration rigoureuse</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Phase 1 : Exploration -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date phase1"><i class="fas fa-calendar"></i> Août 2025</span>
+                        <h4><i class="fas fa-compass"></i> Phase 1 — Exploration libre</h4>
+                        <p>
+                            En août 2025, j'ai commencé à m'intéresser au sujet de <strong>l'intelligence artificielle appliquée à la prévention des blessures sportives</strong>. Ma première approche était informelle et exploratoire : je voulais d'abord comprendre le sujet dans sa globalité avant de structurer quoi que ce soit.
+                        </p>
+                        <p>
+                            J'ai utilisé les canaux que je connaissais le mieux pour m'instruire : des vidéos explicatives et conférences sur <strong>YouTube</strong>, des fils d'actualité et d'experts sur <strong>Twitter/X</strong>, des discussions communautaires sur <strong>Reddit</strong> (r/sports, r/MachineLearning), et <strong>l'intelligence artificielle</strong> (ChatGPT) pour synthétiser et vulgariser des concepts complexes.
+                        </p>
+                        <p>
+                            Dès cette phase, j'ai pris l'habitude de <strong>toujours vérifier les informations en croisant les sources</strong>. Une information trouvée sur YouTube devait être confirmée par un article ou une étude avant d'être retenue.
+                        </p>
+                        <div class="mt-3">
+                            <span class="tool-badge"><i class="fab fa-youtube"></i> YouTube</span>
+                            <span class="tool-badge"><i class="fab fa-twitter"></i> Twitter/X</span>
+                            <span class="tool-badge"><i class="fab fa-reddit"></i> Reddit</span>
+                            <span class="tool-badge"><i class="fas fa-robot"></i> IA (ChatGPT)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 : Structuration -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date phase2"><i class="fas fa-calendar"></i> Septembre - Octobre 2025</span>
+                        <h4><i class="fas fa-tools"></i> Phase 2 — Structuration avec des outils de veille</h4>
+                        <p>
+                            Après avoir acquis une vision globale du sujet, j'ai ressenti le besoin de <strong>structurer et automatiser</strong> ma veille pour ne rien rater et gagner en efficacité. Je suis passé à des outils de veille professionnels.
+                        </p>
+                        <p>
+                            <strong>Google Alertes</strong> m'a permis de configurer des notifications automatiques : dès qu'un nouvel article contenant mes mots-clés (comme "AI sports injury prevention", "prédiction blessures IA") était publié sur le web, je recevais un email. C'est un outil gratuit et très simple à mettre en place.
+                        </p>
+                        <p>
+                            <strong>Feedly</strong> m'a servi d'agrégateur de flux RSS. Au lieu de visiter chaque site individuellement, je me suis abonné aux sources qui m'intéressaient et tous les nouveaux articles apparaissaient dans un seul tableau de bord, organisé par catégories. Cela m'a fait gagner un temps considérable dans ma collecte d'informations.
+                        </p>
+                        <div class="mt-3">
+                            <span class="tool-badge"><i class="fas fa-bell"></i> Google Alertes</span>
+                            <span class="tool-badge"><i class="fas fa-rss"></i> Feedly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 : MDPI -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date phase3"><i class="fas fa-calendar"></i> Novembre 2025 - Février 2026</span>
+                        <h4><i class="fas fa-microscope"></i> Phase 3 — Découverte de MDPI et sources académiques</h4>
+                        <p>
+                            Au fil de mes recherches, j'ai découvert <strong>MDPI</strong> (Multidisciplinary Digital Publishing Institute), une plateforme d'édition académique en <strong>libre accès</strong> (Open Access). C'est devenu ma source principale pour trouver des études et recherches fiables sur mon sujet.
+                        </p>
+                        <p>
+                            C'est là que j'ai trouvé <strong>la grande majorité de mes sources académiques</strong>. Les articles publiés sur MDPI sont <strong>revus par des pairs</strong> (peer-reviewed), ce qui signifie qu'ils sont vérifiés et validés par d'autres chercheurs experts du domaine avant d'être publiés. Cela garantit un niveau de fiabilité et de rigueur scientifique très élevé.
+                        </p>
+                        <p>
+                            MDPI m'a également permis de découvrir des travaux de recherche récents provenant d'universités et laboratoires du monde entier, comme l'UC San Diego ou les études publiées dans <strong>Scientific Reports (Nature)</strong>, que je n'aurais jamais trouvés uniquement avec YouTube ou Twitter.
+                        </p>
+                        <div class="mt-3">
+                            <span class="tool-badge" style="background: rgba(16, 185, 129, 0.08); color: #10b981; border-color: rgba(16, 185, 129, 0.15);"><i class="fas fa-book-open"></i> MDPI</span>
+                            <span class="tool-badge" style="background: rgba(16, 185, 129, 0.08); color: #10b981; border-color: rgba(16, 185, 129, 0.15);"><i class="fas fa-flask"></i> Nature / Scientific Reports</span>
+                            <span class="tool-badge" style="background: rgba(16, 185, 129, 0.08); color: #10b981; border-color: rgba(16, 185, 129, 0.15);"><i class="fas fa-university"></i> UC San Diego</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section MDPI : Explication détaillée -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="mdpi-card">
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.25rem;">
+                                    <i class="fas fa-star"></i> Source Principale
+                                </div>
+                                <h3 style="color: var(--text-primary, #1a1a2e); margin-bottom: 1rem; font-weight: 700;">Qu'est-ce que MDPI ?</h3>
+                                <p style="color: var(--text-secondary, #6b7280); font-size: 0.95rem; line-height: 1.8;">
+                                    <strong>MDPI</strong> (Multidisciplinary Digital Publishing Institute) est un éditeur académique suisse fondé en 1996, spécialisé dans la publication d'articles scientifiques en <strong>libre accès</strong> (Open Access). Contrairement à de nombreuses revues scientifiques traditionnelles qui sont payantes, les articles sur MDPI sont accessibles gratuitement par tous.
+                                </p>
+                                <p style="color: var(--text-secondary, #6b7280); font-size: 0.95rem; line-height: 1.8;">
+                                    Chaque article publié passe par un processus de <strong>relecture par les pairs</strong> (peer-review) : des chercheurs indépendants et experts du sujet vérifient la méthodologie, les résultats et les conclusions avant la publication. Ce système garantit la <strong>fiabilité et la qualité scientifique</strong> des informations.
+                                </p>
+                                <p style="color: var(--text-secondary, #6b7280); font-size: 0.95rem; line-height: 1.8;">
+                                    C'est grâce à MDPI que j'ai pu accéder à des études récentes et rigoureuses sur l'application de l'IA en biomécanique sportive, notamment la scoping review de la revue <strong>Bioengineering</strong> qui analysait 73 études sur le sujet.
+                                </p>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="mdpi-stats">
+                                    <div class="mdpi-stat">
+                                        <div class="number">400+</div>
+                                        <div class="label">Revues scientifiques</div>
+                                    </div>
+                                    <div class="mdpi-stat">
+                                        <div class="number">1996</div>
+                                        <div class="label">Année de fondation</div>
+                                    </div>
+                                    <div class="mdpi-stat">
+                                        <div class="number">100%</div>
+                                        <div class="label">Open Access (gratuit)</div>
+                                    </div>
+                                    <div class="mdpi-stat">
+                                        <div class="number"><i class="fas fa-check-circle"></i></div>
+                                        <div class="label">Peer-reviewed</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3>
+                    <p>Développeur Web & Applicatif</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p>
+                <p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll
+            $(window).scroll(function() {
+                $(this).scrollTop() > 50 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled');
+            });
+
+            // Animate elements on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.definition-card, .timeline-content, .mdpi-card, .key-point').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Staggered animation for key points
+            document.querySelectorAll('.key-point').forEach((el, index) => {
+                el.style.transitionDelay = (index * 0.1) + 's';
+            });
+
+            // Staggered animation for timeline items
+            document.querySelectorAll('.timeline-content').forEach((el, index) => {
+                el.style.transitionDelay = (index * 0.15) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
