@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Maquette Sicily Lines - Prototypage Uizard">
+    <title>Maquette Sicily Lines - Fahel Brik-Kettou</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .screen-section {
+            padding: 4rem 0;
+        }
+
+        .screen-section:nth-child(even) {
+            background: var(--bg-alt, #f8f9fa);
+        }
+
+        .screen-section:nth-child(odd) {
+            background: var(--bg-main, #fff);
+        }
+
+        .screen-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 45px rgba(102, 126, 234, 0.15);
+        }
+
+        .screen-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screen-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .screen-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .screen-title-wrap h3 {
+            margin: 0;
+            color: var(--text-primary, #1a1a2e);
+            font-weight: 700;
+        }
+
+        .screen-description {
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .screen-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.25rem 0 0 0;
+        }
+
+        .screen-features li {
+            padding: 0.4rem 0;
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .screen-features li i {
+            color: #667eea;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .uizard-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            color: #667eea;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-pencil-ruler"></i></div>
+                <h1>Maquette Sicily Lines</h1>
+                <p class="lead">Prototypage de l'interface utilisateur réalisé avec Uizard avant le développement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Contexte de la Maquette</h3>
+                        </div>
+                        <p class="screen-description">
+                            Avant de commencer le développement du site web Sicily Lines en PHP Laravel, j'ai d'abord réalisé une <strong>maquette interactive</strong> avec <strong>Uizard</strong>. L'objectif était de visualiser l'ensemble des pages du site, de définir le parcours utilisateur et de valider l'ergonomie avant d'écrire la moindre ligne de code.
+                        </p>
+                        <p class="screen-description">
+                            <strong>Uizard</strong> est un outil de prototypage en ligne assisté par l'intelligence artificielle. Il permet de créer rapidement des maquettes interactives avec un rendu réaliste, de tester la navigation entre les pages et de partager le prototype avec une équipe pour recueillir des retours.
+                        </p>
+                        <div class="mt-3">
+                            <span class="uizard-badge"><i class="fas fa-pencil-ruler"></i> Uizard</span>
+                            <span class="uizard-badge"><i class="fas fa-palette"></i> UI/UX Design</span>
+                            <span class="uizard-badge"><i class="fas fa-mouse-pointer"></i> Prototypage interactif</span>
+                            <span class="uizard-badge"><i class="fas fa-ship"></i> Sicily Lines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 1 : Accueil -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <div class="screen-card">
+                        <img src="page1.png" alt="Maquette Sicily Lines - Page d'accueil">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap">
+                        <div class="screen-number">1</div>
+                        <h3>Page d'Accueil</h3>
+                    </div>
+                    <p class="screen-description">
+                        La page d'accueil est la vitrine du site Sicily Lines. Elle présente la compagnie avec un <strong>carrousel d'images</strong> montrant les destinations méditerranéennes et un texte d'accroche invitant les visiteurs à découvrir les formules de voyage.
+                    </p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Navbar avec logo ferry, accès à la liste des ferrys et bouton de connexion</li>
+                        <li><i class="fas fa-chevron-right"></i> Carrousel d'images interactif avec flèches de navigation</li>
+                        <li><i class="fas fa-chevron-right"></i> Texte de présentation des formules de voyage</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Se connecter" en call-to-action</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 2 : Connexion -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7">
+                    <div class="screen-card">
+                        <img src="pageCo.png" alt="Maquette Sicily Lines - Page de connexion">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap">
+                        <div class="screen-number">2</div>
+                        <h3>Page de Connexion</h3>
+                    </div>
+                    <p class="screen-description">
+                        La page de connexion permet aux utilisateurs de s'authentifier avec leur <strong>adresse email et mot de passe</strong>. Le design est épuré et centré pour guider l'utilisateur directement vers l'action.
+                    </p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Formulaire centré avec champs email et mot de passe</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Connexion" bien visible</li>
+                        <li><i class="fas fa-chevron-right"></i> Lien "Mot de passe oublié ?" pour la récupération</li>
+                        <li><i class="fas fa-chevron-right"></i> Lien "Créer un compte" pour les nouveaux utilisateurs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 3 : Liste des ferrys -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <div class="screen-card">
+                        <img src="ferry.png" alt="Maquette Sicily Lines - Liste des ferrys">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap">
+                        <div class="screen-number">3</div>
+                        <h3>Liste des Ferrys</h3>
+                    </div>
+                    <p class="screen-description">
+                        Cette page affiche l'ensemble de la <strong>flotte de ferrys</strong> sous forme de galerie d'images. Chaque ferry possède un bouton "Voir" pour consulter ses détails et un bouton "Supprimer" pour les administrateurs. L'interface inclut aussi un bouton d'export PDF.
+                    </p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Galerie visuelle avec photos de chaque ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Voir" pour accéder aux détails du ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Supprimer" pour la gestion admin</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Ajout de ferry" dans la navbar</li>
+                        <li><i class="fas fa-chevron-right"></i> Export PDF de la liste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 4 : Ajout ferry -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7">
+                    <div class="screen-card">
+                        <img src="ajoutFerry.png" alt="Maquette Sicily Lines - Ajout d'un ferry">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap">
+                        <div class="screen-number">4</div>
+                        <h3>Ajout d'un Ferry</h3>
+                    </div>
+                    <p class="screen-description">
+                        Le formulaire d'ajout permet aux administrateurs de <strong>créer un nouveau ferry</strong> dans le système. Il regroupe toutes les informations nécessaires : nom, dimensions, équipements et détails techniques du navire.
+                    </p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champ "Nom du Ferry" en texte libre</li>
+                        <li><i class="fas fa-chevron-right"></i> Champs "Longueur" et "Largeur" côte à côte</li>
+                        <li><i class="fas fa-chevron-right"></i> Zone de texte pour la liste des équipements (wifi, radar, GPS...)</li>
+                        <li><i class="fas fa-chevron-right"></i> Zone de texte pour les détails du ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Ajouter le Ferry" pour valider</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Retour -->
+    <section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container text-center">
+            <h3 style="color: white; margin-bottom: 1rem;">Voir le projet complet</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Retrouvez le développement du site et de l'application Sicily Lines sur ma page projets.</p>
+            <a href="projets.html" class="btn btn-light btn-lg" style="border-radius: 50px; font-weight: 600; padding: 0.75rem 2rem;">
+                <i class="fas fa-arrow-left"></i> Retour aux Projets
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                $(this).scrollTop() > 50 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled');
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.screen-card, .cv-main-card, .screen-title-wrap').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

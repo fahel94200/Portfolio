@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Certifications OpenClassrooms - Fahel Brik-Kettou">
+    <title>Certifications - Fahel Brik-Kettou</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .cert-card {
+            background: var(--bg-card, #fff);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.25);
+        }
+
+        .cert-image-wrap {
+            background: #f0f2f5;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .cert-image-wrap img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cert-body {
+            padding: 1.75rem;
+        }
+
+        .cert-body h4 {
+            color: var(--text-primary, #1a1a2e);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary, #6b7280);
+        }
+
+        .cert-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .cert-meta i {
+            color: #667eea;
+        }
+
+        .cert-body p {
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .cert-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.85rem;
+            background: rgba(102, 126, 234, 0.08);
+            color: #667eea;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-certificate"></i></div>
+                <h1>Mes Certifications</h1>
+                <p class="lead">Certifications obtenues sur OpenClassrooms pour compléter ma formation BTS SIO</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card text-center">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+                            <i class="fas fa-graduation-cap" style="color: #667eea;"></i>
+                        </div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">OpenClassrooms</h3>
+                        <p style="color: var(--text-secondary, #6b7280); max-width: 700px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8;">
+                            En parallèle de mon BTS SIO, j'ai suivi et validé plusieurs formations sur <strong>OpenClassrooms</strong>, la plateforme de formation en ligne de référence en France. Chaque certification est délivrée après validation d'un parcours complet avec des quiz et des exercices pratiques.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- Certification Python -->
+                <div class="col-lg-6">
+                    <div class="cert-card">
+                        <div class="cert-image-wrap">
+                            <img src="cert_python.png" alt="Certificat Python - OpenClassrooms">
+                        </div>
+                        <div class="cert-body">
+                            <h4>Apprenez les bases du langage Python</h4>
+                            <div class="cert-meta">
+                                <span><i class="fas fa-calendar"></i> 19 mars 2025</span>
+                                <span><i class="fas fa-user"></i> Mathieu Nebra</span>
+                            </div>
+                            <p>Formation aux fondamentaux de Python : variables, boucles, conditions, fonctions et programmation orientée objet. Python est un langage polyvalent très utilisé en data science, en automatisation et en développement web (Django, Flask).</p>
+                            <span class="cert-number"><i class="fas fa-hashtag"></i> 9660516800</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification Git/GitHub -->
+                <div class="col-lg-6">
+                    <div class="cert-card">
+                        <div class="cert-image-wrap">
+                            <img src="cert_gitHub.png" alt="Certificat Git GitHub - OpenClassrooms">
+                        </div>
+                        <div class="cert-body">
+                            <h4>Gérez du code avec Git et GitHub</h4>
+                            <div class="cert-meta">
+                                <span><i class="fas fa-calendar"></i> 26 mars 2025</span>
+                                <span><i class="fas fa-user"></i> Mathieu Nebra</span>
+                            </div>
+                            <p>Maîtrise du système de versioning Git et de la plateforme GitHub : gestion de branches, commits, pull requests, merge et travail collaboratif. Compétence indispensable pour tout développeur travaillant en équipe.</p>
+                            <span class="cert-number"><i class="fas fa-hashtag"></i> 4741409551</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification Métiers de Développeur -->
+                <div class="col-lg-6">
+                    <div class="cert-card">
+                        <div class="cert-image-wrap">
+                            <img src="cert_metierDeDev.png" alt="Certificat Métiers de Développeur - OpenClassrooms">
+                        </div>
+                        <div class="cert-body">
+                            <h4>Découvrez les métiers de développeur</h4>
+                            <div class="cert-meta">
+                                <span><i class="fas fa-calendar"></i> 26 mars 2025</span>
+                                <span><i class="fas fa-user"></i> Mathieu Nebra</span>
+                            </div>
+                            <p>Panorama complet des métiers du développement informatique : développeur front-end, back-end, full-stack, mobile, DevOps. Compréhension des parcours professionnels, des technologies associées et des compétences requises pour chaque spécialisation.</p>
+                            <span class="cert-number"><i class="fas fa-hashtag"></i> 8973938457</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification Technicien Informatique -->
+                <div class="col-lg-6">
+                    <div class="cert-card">
+                        <div class="cert-image-wrap">
+                            <img src="cert_technicien.png" alt="Certificat Technicien Informatique - OpenClassrooms">
+                        </div>
+                        <div class="cert-body">
+                            <h4>Découvrez le métier de technicien informatique</h4>
+                            <div class="cert-meta">
+                                <span><i class="fas fa-calendar"></i> 26 mars 2025</span>
+                                <span><i class="fas fa-user"></i> Mathieu Nebra</span>
+                            </div>
+                            <p>Introduction au métier de technicien informatique : maintenance matérielle et logicielle, support utilisateur, gestion de parc informatique et dépannage. Compétences complémentaires à mon profil de développeur pour comprendre l'infrastructure.</p>
+                            <span class="cert-number"><i class="fas fa-hashtag"></i> 9411066845</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Retour -->
+            <div class="text-center mt-5">
+                <a href="projets.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #17678f, #155cac); border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600;">
+                    <i class="fas fa-arrow-left"></i> Retour aux Projets
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                $(this).scrollTop() > 50 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled');
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.cert-card, .cv-main-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
