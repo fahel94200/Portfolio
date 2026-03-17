@@ -44,12 +44,12 @@
     
     <section class="py-5" style="background: var(--bg-alt);">
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center">
                 <!-- Projet E-Commerce -->
-                <div class="col-lg-6">
-                    <div class="cv-main-card project-card-full">
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
                         <div class="project-header-icon"><i class="fas fa-shopping-cart"></i></div>
-                        <span class="badge bg-success mb-3">Projet BTS SIO</span>
+                        <span class="badge bg-success mb-3" style="align-self: flex-start;">Projet BTS SIO</span>
                         <h3>Site E-Commerce de Bonbons</h3>
                         <p class="project-meta"><i class="fas fa-calendar"></i> Durée: 2 mois</p>
                         <div class="project-tags-wrap">
@@ -74,7 +74,7 @@
                             <li><i class="fas fa-check"></i> Design responsive et moderne</li>
                         </ul>
                         <h5 class="mt-3">Compétences acquises</h5>
-                        <ul class="achievement-list">
+                        <ul class="achievement-list flex-grow-1">
                             <li><i class="fas fa-star"></i> Maîtrise du framework Laravel</li>
                             <li><i class="fas fa-star"></i> Architecture MVC (Modèle-Vue-Contrôleur)</li>
                             <li><i class="fas fa-star"></i> Gestion de bases de données relationnelles</li>
@@ -83,12 +83,12 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <!-- Projet Sicily Lines -->
-                <div class="col-lg-6">
-                    <div class="cv-main-card project-card-full">
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
                         <div class="project-header-icon"><i class="fas fa-ship"></i></div>
-                        <span class="badge bg-success mb-3">Projet BTS SIO</span>
+                        <span class="badge bg-success mb-3" style="align-self: flex-start;">Projet BTS SIO</span>
                         <h3>Sicily Lines – Réservation de Traversées Maritimes</h3>
                         <p class="project-meta"><i class="fas fa-calendar"></i> Durée: 2 mois</p>
                         <div class="project-tags-wrap">
@@ -117,7 +117,7 @@
                             <li><i class="fas fa-check"></i> Contraintes d'intégrité et index optimisés pour les performances</li>
                         </ul>
                         <h5 class="mt-3">Compétences acquises</h5>
-                        <ul class="achievement-list">
+                        <ul class="achievement-list flex-grow-1">
                             <li><i class="fas fa-star"></i> Développement d'applications desktop en C# (Windows Forms)</li>
                             <li><i class="fas fa-star"></i> Développement web full-stack avec PHP Laravel</li>
                             <li><i class="fas fa-star"></i> Modélisation UML (diagrammes de classes)</li>
@@ -127,46 +127,47 @@
                         </ul>
                     </div>
                 </div>
-                
-                <!-- Certifications OpenClassrooms -->
-                <div class="col-lg-6">
-                    <div class="cv-main-card project-card-full">
-                        <div class="project-header-icon"><i class="fas fa-certificate"></i></div>
-                        <span class="badge bg-warning text-dark mb-3">Formation Continue</span>
-                        <h3>Certifications OpenClassrooms</h3>
-                        <p class="project-meta"><i class="fas fa-calendar"></i> Durée: 2 mois</p>
+
+                <!-- Projet GestionEcole -->
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
+                        <div class="project-header-icon"><i class="fas fa-school"></i></div>
+                        <span class="badge bg-success mb-3" style="align-self: flex-start;">Projet BTS SIO</span>
+                        <h3>GestionEcole – Portail Académique</h3>
+                        <p class="project-meta"><i class="fas fa-calendar"></i> Année 2024-25</p>
                         <div class="project-tags-wrap">
-                            <span class="skill-tag tech">Développement Web</span>
-                            <span class="skill-tag tech">Python</span>
-                            <span class="skill-tag tech">Git/GitHub</span>
-                            <span class="skill-tag tech">Informatique</span>
+                            <span class="skill-tag tech">PHP</span>
+                            <span class="skill-tag tech">Laravel</span>
+                            <span class="skill-tag tech">MVC</span>
+                            <span class="skill-tag tech">Bootstrap</span>
+                            <span class="skill-tag tech">MySQL</span>
                         </div>
                         <h5 class="mt-4">Description</h5>
-                        <p>Formation complète aux fondamentaux du développement web et de la programmation via la plateforme OpenClassrooms. Acquisition de compétences essentielles pour le métier de développeur.</p>
-                        <h5 class="mt-3">Modules suivis et certifiés</h5>
+                        <p>Système complet de gestion pour établissements scolaires développé en Laravel. Centralisation des données élèves, suivi des performances académiques et outils de gestion pour le corps enseignant et l'administration.</p>
+                        <h5 class="mt-3">Fonctionnalités principales</h5>
                         <ul class="achievement-list">
-                            <li><i class="fas fa-check"></i> Initiation au développement web</li>
-                            <li><i class="fas fa-check"></i> Gestion de code avec Git et GitHub</li>
-                            <li><i class="fas fa-check"></i> Bases du langage Python</li>
-                            <li><i class="fas fa-check"></i> Métier de technicien informatique</li>
-                            <li><i class="fas fa-check"></i> Bonnes pratiques de développement</li>
-                            <li><i class="fas fa-check"></i> Travail collaboratif avec Git</li>
+                            <li><i class="fas fa-check"></i> Ajout et suppression d'un élève</li>
+                            <li><i class="fas fa-check"></i> Modification des informations d'un étudiant</li>
+                            <li><i class="fas fa-check"></i> Tri de la liste d'étudiants par classe</li>
+                            <li><i class="fas fa-check"></i> Affichage des 5 premiers étudiants (classement)</li>
+                            <li><i class="fas fa-check"></i> Interface responsive avec Bootstrap</li>
+                            <li><i class="fas fa-check"></i> Base de données MySQL relationnelle</li>
                         </ul>
                         <h5 class="mt-3">Compétences acquises</h5>
-                        <ul class="achievement-list">
-                            <li><i class="fas fa-star"></i> Fondamentaux du développement web</li>
-                            <li><i class="fas fa-star"></i> Programmation orientée objet en Python</li>
-                            <li><i class="fas fa-star"></i> Gestion de versions avec Git/GitHub</li>
-                            <li><i class="fas fa-star"></i> Méthodologies de développement</li>
+                        <ul class="achievement-list flex-grow-1">
+                            <li><i class="fas fa-star"></i> Architecture MVC avec Laravel</li>
+                            <li><i class="fas fa-star"></i> Opérations CRUD complètes</li>
+                            <li><i class="fas fa-star"></i> Requêtes SQL (tri, filtrage, agrégation)</li>
+                            <li><i class="fas fa-star"></i> Interface utilisateur avec Bootstrap</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <!-- Portfolio Personnel -->
-                <div class="col-lg-6">
-                    <div class="cv-main-card project-card-full">
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
                         <div class="project-header-icon"><i class="fas fa-globe"></i></div>
-                        <span class="badge bg-info text-dark mb-3">En cours</span>
+                        <span class="badge bg-info text-dark mb-3" style="align-self: flex-start;">En cours</span>
                         <h3>Portfolio Personnel</h3>
                         <p class="project-meta"><i class="fas fa-calendar"></i> Projet en cours - 2025</p>
                         <div class="project-tags-wrap">
@@ -190,7 +191,7 @@
                             <li><i class="fas fa-check"></i> Optimisation SEO</li>
                         </ul>
                         <h5 class="mt-3">Objectifs</h5>
-                        <ul class="achievement-list">
+                        <ul class="achievement-list flex-grow-1">
                             <li><i class="fas fa-star"></i> Présenter mon parcours professionnel</li>
                             <li><i class="fas fa-star"></i> Démontrer mes compétences techniques</li>
                             <li><i class="fas fa-star"></i> Faciliter la recherche d'alternance/stage</li>
@@ -198,7 +199,83 @@
                         </ul>
                     </div>
                 </div>
-                
+
+                <!-- Certifications OpenClassrooms -->
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
+                        <div class="project-header-icon"><i class="fas fa-certificate"></i></div>
+                        <span class="badge bg-warning text-dark mb-3" style="align-self: flex-start;">Formation Continue</span>
+                        <h3>Certifications OpenClassrooms</h3>
+                        <p class="project-meta"><i class="fas fa-calendar"></i> Mars 2025</p>
+                        <div class="project-tags-wrap">
+                            <span class="skill-tag tech">Développement Web</span>
+                            <span class="skill-tag tech">Python</span>
+                            <span class="skill-tag tech">Git/GitHub</span>
+                            <span class="skill-tag tech">Informatique</span>
+                        </div>
+                        <h5 class="mt-4">Description</h5>
+                        <p>Formation complète aux fondamentaux du développement web et de la programmation via la plateforme OpenClassrooms. Acquisition de compétences essentielles pour le métier de développeur.</p>
+                        <h5 class="mt-3">Modules suivis et certifiés</h5>
+                        <ul class="achievement-list">
+                            <li><i class="fas fa-check"></i> Initiation au développement web</li>
+                            <li><i class="fas fa-check"></i> Gestion de code avec Git et GitHub</li>
+                            <li><i class="fas fa-check"></i> Bases du langage Python</li>
+                            <li><i class="fas fa-check"></i> Métier de technicien informatique</li>
+                            <li><i class="fas fa-check"></i> Bonnes pratiques de développement</li>
+                            <li><i class="fas fa-check"></i> Travail collaboratif avec Git</li>
+                        </ul>
+                        <h5 class="mt-3">Compétences acquises</h5>
+                        <ul class="achievement-list flex-grow-1">
+                            <li><i class="fas fa-star"></i> Fondamentaux du développement web</li>
+                            <li><i class="fas fa-star"></i> Programmation orientée objet en Python</li>
+                            <li><i class="fas fa-star"></i> Gestion de versions avec Git/GitHub</li>
+                            <li><i class="fas fa-star"></i> Méthodologies de développement</li>
+                        </ul>
+                        <div class="mt-auto pt-4 text-center">
+                            <a href="certification.html" class="btn btn-primary" style="background: linear-gradient(135deg, #17678f, #155cac); border: none; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600;">
+                                <i class="fas fa-eye"></i> Voir les certificats
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maquette Sicily Lines - Uizard -->
+                <div class="col-lg-6 d-flex">
+                    <div class="cv-main-card project-card-full d-flex flex-column w-100">
+                        <div class="project-header-icon"><i class="fas fa-pencil-ruler"></i></div>
+                        <span class="badge bg-success mb-3" style="align-self: flex-start;">Projet BTS SIO</span>
+                        <h3>Maquette Sicily Lines – Uizard</h3>
+                        <p class="project-meta"><i class="fas fa-calendar"></i> Année 2024-25</p>
+                        <div class="project-tags-wrap">
+                            <span class="skill-tag tech">Uizard</span>
+                            <span class="skill-tag tech">UI/UX Design</span>
+                            <span class="skill-tag tech">Maquettage</span>
+                            <span class="skill-tag tech">Prototypage</span>
+                        </div>
+                        <h5 class="mt-4">Description</h5>
+                        <p>Avant de développer le site web Sicily Lines en Laravel, j'ai réalisé une maquette interactive avec <strong>Uizard</strong>, un outil de prototypage en ligne assisté par l'IA. Cette étape m'a permis de visualiser l'interface utilisateur, de valider le parcours de navigation et de présenter le rendu final avant de coder.</p>
+                        <h5 class="mt-3">Pages maquettées</h5>
+                        <ul class="achievement-list">
+                            <li><i class="fas fa-check"></i> Page d'accueil avec carrousel et présentation des formules</li>
+                            <li><i class="fas fa-check"></i> Page de connexion (adresse mail + mot de passe)</li>
+                            <li><i class="fas fa-check"></i> Liste des ferrys avec images, boutons Voir et Supprimer</li>
+                            <li><i class="fas fa-check"></i> Formulaire d'ajout d'un nouveau ferry (nom, dimensions, équipements)</li>
+                        </ul>
+                        <h5 class="mt-3">Compétences acquises</h5>
+                        <ul class="achievement-list flex-grow-1">
+                            <li><i class="fas fa-star"></i> Conception d'interfaces utilisateur (UI Design)</li>
+                            <li><i class="fas fa-star"></i> Prototypage rapide avec Uizard</li>
+                            <li><i class="fas fa-star"></i> Réflexion sur l'expérience utilisateur (UX)</li>
+                            <li><i class="fas fa-star"></i> Préparation visuelle avant le développement</li>
+                        </ul>
+                        <div class="mt-4 text-center">
+            <a href="maquette.html" class="btn btn-primary" style="background: linear-gradient(135deg,#17678f, #155cac); border: none; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600;">
+                <i class="fas fa-eye"></i> Voir les maquettes
+            </a>
+        </div>
+                    </div>
+                </div>
+
                 <!-- Section Projets à venir -->
                 <div class="col-12">
                     <div class="cv-main-card" style="text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));">
