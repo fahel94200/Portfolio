@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projet Sicily Lines - Système de Réservation Maritime">
+    <title>Sicily Lines - Fahel Brik-Kettou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .screen-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);border:1px solid rgba(102,126,234,.1);transition:all .3s ease}
+        .screen-card:hover{transform:translateY(-4px);box-shadow:0 16px 45px rgba(102,126,234,.15)}
+        .screen-card img{width:100%;height:auto;display:block}
+        .screen-number{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;color:white;font-size:1.1rem;font-weight:700;flex-shrink:0}
+        .screen-number.csharp{background:linear-gradient(135deg,#667eea,#764ba2)}
+        .screen-number.php{background:linear-gradient(135deg,#f5576c,#ff8a5c)}
+        .screen-title-wrap{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+        .screen-title-wrap h3{margin:0;color:var(--text-primary,#1a1a2e);font-weight:700}
+        .screen-description{color:var(--text-secondary,#6b7280);font-size:.95rem;line-height:1.8}
+        .screen-features{list-style:none;padding:0;margin:1.25rem 0 0}
+        .screen-features li{padding:.4rem 0;color:var(--text-secondary,#6b7280);font-size:.9rem;display:flex;align-items:flex-start;gap:.6rem}
+        .screen-features li i{color:#667eea;margin-top:.2rem;flex-shrink:0}
+        .section-divider{padding:3rem 0;text-align:center}
+        .section-divider h2{font-weight:800;margin-bottom:.5rem}
+        .section-divider p{color:var(--text-secondary,#6b7280)}
+        .tech-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:50px;font-size:.85rem;font-weight:500;margin:.25rem}
+        .tech-pill.csharp{background:rgba(102,126,234,.08);color:#667eea;border:1px solid rgba(102,126,234,.15)}
+        .tech-pill.php{background:rgba(245,87,108,.08);color:#f5576c;border:1px solid rgba(245,87,108,.15)}
+        .screen-section{padding:4rem 0}
+        .screen-section:nth-child(even){background:var(--bg-alt,#f8f9fa)}
+        .screen-section:nth-child(odd){background:var(--bg-main,#fff)}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-ship"></i></div>
+                <h1>Sicily Lines</h1>
+                <p class="lead">Système complet de réservation de traversées maritimes — Application C# Windows Forms & Site Web PHP Laravel</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Présentation du Projet</h3>
+                        </div>
+                        <p class="screen-description">Le projet Sicily Lines est un <strong>système complet de réservation de traversées maritimes</strong> développé dans le cadre de mon BTS SIO. Il comprend la modélisation UML, la conception d'une base de données MySQL avec 9 tables interconnectées, et le développement de <strong>deux applications distinctes</strong> : une application desktop en C# avec Windows Forms et un site web en PHP Laravel.</p>
+                        <p class="screen-description">Ce projet m'a permis de démontrer ma polyvalence en développant le même système avec deux technologies différentes, chacune adaptée à un usage spécifique.</p>
+                        <div class="row g-3 mt-4">
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-calendar-alt"></i><div><strong>Durée</strong><p>2 mois</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-database"></i><div><strong>Base de données</strong><p>MySQL — 9 tables</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-desktop"></i><div><strong>Desktop</strong><p>C# Windows Forms</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-globe"></i><div><strong>Web</strong><p>PHP Laravel (MVC)</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PARTIE C# ========== -->
+    <div class="section-divider" style="background: linear-gradient(135deg, #132885 0%, #4f227b 100%); color: white; padding: 3rem 0;">
+        <div class="container">
+            <h2><i class="fas fa-desktop"></i> Version C# — Windows Forms</h2>
+            <p style="color: rgba(255,255,255,0.8);">Application desktop développée avec Visual Studio 2022 en C# pour la gestion des liaisons maritimes</p>
+            <div class="mt-3">
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fas fa-code"></i> C#</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fab fa-windows"></i> Windows Forms</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fas fa-database"></i> MySQL</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fas fa-layer-group"></i> DAO Pattern</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- C# Screen 1 -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="simple.png" alt="Gestion des Liaisons Ferry - Interface principale"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number csharp">1</div><h3>Interface Principale — Gestion des Liaisons</h3></div>
+                    <p class="screen-description">L'interface principale de l'application Windows Forms permet de gérer les <strong>liaisons maritimes</strong> entre les ports siciliens. À gauche, la liste des ports (Messine, Milazzo, Palerme, Trapani). À droite, les liaisons avec leur code, ports de départ/arrivée, durée et secteur.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Liste des ports avec sélection interactive</li>
+                        <li><i class="fas fa-chevron-right"></i> Affichage détaillé des liaisons par port</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Afficher toutes les liaisons"</li>
+                        <li><i class="fas fa-chevron-right"></i> Zones de mise à jour, suppression et insertion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C# Screen 2 -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="insertion.png" alt="Insertion d'une liaison - Dropdown ports"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number csharp">2</div><h3>Insertion d'une Nouvelle Liaison</h3></div>
+                    <p class="screen-description">Le formulaire d'insertion permet de créer une nouvelle liaison maritime. Les <strong>ComboBox déroulantes</strong> sont alimentées dynamiquement depuis la base de données MySQL avec tous les ports disponibles (Favignana, Lipari, Messine, Milazzo, Palerme, etc.).</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Sélection du port d'arrivée et de départ via dropdown</li>
+                        <li><i class="fas fa-chevron-right"></i> Choix du secteur géographique</li>
+                        <li><i class="fas fa-chevron-right"></i> Saisie de la durée (heures/minutes)</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Ajouter" pour valider l'insertion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C# Screen 3 -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="suppression.png" alt="Confirmation de suppression"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number csharp">3</div><h3>Suppression avec Confirmation</h3></div>
+                    <p class="screen-description">Avant chaque suppression, une <strong>boîte de dialogue de confirmation</strong> demande à l'utilisateur de valider son action. Ici, la suppression de la liaison "Milazzo → Lipari". Cette sécurité empêche les suppressions accidentelles.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> MessageBox de confirmation (Oui/Non)</li>
+                        <li><i class="fas fa-chevron-right"></i> Affichage du détail de la liaison à supprimer</li>
+                        <li><i class="fas fa-chevron-right"></i> Protection contre les suppressions accidentelles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C# Screen 4 -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="duree.png" alt="Mise à jour réussie"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number csharp">4</div><h3>Mise à Jour de la Durée</h3></div>
+                    <p class="screen-description">La mise à jour de la durée d'une traversée se fait en sélectionnant la liaison, en modifiant les heures et minutes, puis en cliquant sur "Mettre à jour". Un <strong>message de succès</strong> confirme l'opération.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Modification de la durée en heures/minutes</li>
+                        <li><i class="fas fa-chevron-right"></i> Message "Durée modifiée avec succès"</li>
+                        <li><i class="fas fa-chevron-right"></i> Rafraîchissement automatique de la liste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C# Screen 5 -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="reussisAjout.png" alt="Liaison ajoutée avec succès"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number csharp">5</div><h3>Ajout Réussi d'une Liaison</h3></div>
+                    <p class="screen-description">Après l'insertion d'une nouvelle liaison, un <strong>message de confirmation</strong> s'affiche ("Liaison ajoutée avec succès") et la liste se met à jour automatiquement pour afficher la nouvelle entrée.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Feedback immédiat à l'utilisateur</li>
+                        <li><i class="fas fa-chevron-right"></i> Actualisation automatique de l'affichage</li>
+                        <li><i class="fas fa-chevron-right"></i> Pattern DAO pour la couche d'accès aux données</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PARTIE PHP LARAVEL ========== -->
+    <div class="section-divider" style="background: linear-gradient(135deg, #f5576c 0%, #c86037 100%); color: white; padding: 3rem 0;">
+        <div class="container">
+            <h2><i class="fas fa-globe"></i> Version PHP — Laravel</h2>
+            <p style="color: rgba(255,255,255,0.8);">Site web complet de réservation développé avec le framework Laravel en architecture MVC</p>
+            <div class="mt-3">
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fab fa-php"></i> PHP 8</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fab fa-laravel"></i> Laravel</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fas fa-database"></i> MySQL</span>
+                <span class="tech-pill" style="background:rgba(255,255,255,0.15);color:white;border-color:rgba(255,255,255,0.3)"><i class="fas fa-lock"></i> Auth</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHP Screen 1 - Accueil -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="acceuilphp.png" alt="Accueil SicilyLines Laravel"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">1</div><h3>Page d'Accueil</h3></div>
+                    <p class="screen-description">La page d'accueil du site présente la compagnie SicilyLines avec un <strong>carrousel d'images</strong> de ferrys, le slogan "Voyagez en toute tranquillité" et un accès direct à la liste des ferrys et à la connexion.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Navbar avec logo, boutons Liste Ferry et Se connecter</li>
+                        <li><i class="fas fa-chevron-right"></i> Carrousel Bootstrap avec images de la flotte</li>
+                        <li><i class="fas fa-chevron-right"></i> Présentation des formules de voyage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 2 - Liste ferrys -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="lFerry.png" alt="Liste des ferrys"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">2</div><h3>Liste des Ferrys</h3></div>
+                    <p class="screen-description">La page affiche tous les ferrys sous forme de <strong>cards responsive</strong> avec leur image, nom et capacité passagers. Chaque card a un bouton "Voir" pour accéder aux détails du ferry.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Grille de cards responsive (3 colonnes)</li>
+                        <li><i class="fas fa-chevron-right"></i> Image, nom et nombre de passagers par ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Voir" pour les détails</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 3 - Détail ferry -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="fichedetaillé.png" alt="Détail ferry Eduardo"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">3</div><h3>Fiche Détaillée d'un Ferry</h3></div>
+                    <p class="screen-description">Chaque ferry possède sa <strong>fiche détaillée</strong> avec toutes ses caractéristiques techniques : longueur, largeur, vitesse, capacité passagers, véhicules (-2m et +2m), équipements et slogan.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Image grand format du ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Caractéristiques en grille (longueur, largeur, vitesse...)</li>
+                        <li><i class="fas fa-chevron-right"></i> Capacités véhicules et passagers</li>
+                        <li><i class="fas fa-chevron-right"></i> Liste des équipements (Restaurant, Bar, WiFi)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 4 - Connexion -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="pagecoferry.png" alt="Page de connexion"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">4</div><h3>Page de Connexion</h3></div>
+                    <p class="screen-description">Le système d'authentification permet aux utilisateurs de se connecter avec leur <strong>email et mot de passe</strong>. Les mots de passe sont hashés avec bcrypt via Laravel. Option "Se souvenir de moi" et liens vers la récupération de mot de passe et l'inscription.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Formulaire email + mot de passe</li>
+                        <li><i class="fas fa-chevron-right"></i> Checkbox "Se souvenir de moi"</li>
+                        <li><i class="fas fa-chevron-right"></i> Liens "Mot de passe oublié" et "Créer un compte"</li>
+                        <li><i class="fas fa-chevron-right"></i> Hashage bcrypt via Laravel Auth</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 5 - Inscription -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="crecompte.png" alt="Page d'inscription"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">5</div><h3>Création de Compte</h3></div>
+                    <p class="screen-description">Le formulaire d'inscription demande le <strong>nom complet, email, mot de passe et confirmation</strong>. La validation côté serveur vérifie l'unicité de l'email et la correspondance des mots de passe.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champs : nom, email, mot de passe, confirmation</li>
+                        <li><i class="fas fa-chevron-right"></i> Validation Laravel (required, unique, confirmed)</li>
+                        <li><i class="fas fa-chevron-right"></i> Lien "Déjà un compte ? Se connecter"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 6 - Ajout ferry -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="AFERRY.png" alt="Formulaire ajout ferry"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">6</div><h3>Ajouter un Nouveau Ferry</h3></div>
+                    <p class="screen-description">Le formulaire d'ajout permet aux utilisateurs connectés de <strong>créer un nouveau ferry</strong> avec toutes ses informations : nom, dimensions (longueur/largeur), vitesse, capacités passagers et véhicules, équipements, slogan et image.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champs organisés en grille (2 colonnes)</li>
+                        <li><i class="fas fa-chevron-right"></i> Upload d'image du ferry</li>
+                        <li><i class="fas fa-chevron-right"></i> Zone de texte pour les équipements</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "+ Ajouter le Ferry"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 7 - Modifier ferry -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="MODFERRY.png" alt="Modification ferry"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">7</div><h3>Modifier un Ferry</h3></div>
+                    <p class="screen-description">La page de modification pré-remplit tous les champs avec les données existantes du ferry (ici "Mantegna" : 125m, 23m, 26 nœuds, 350 passagers). L'utilisateur peut modifier n'importe quel champ et <strong>changer l'image</strong>.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Formulaire pré-rempli avec les données actuelles</li>
+                        <li><i class="fas fa-chevron-right"></i> Aperçu de l'image actuelle</li>
+                        <li><i class="fas fa-chevron-right"></i> Upload optionnel d'une nouvelle image</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Enregistrer les modifications"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHP Screen 8 - Mon Compte -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="ESPAECOMPTE.png" alt="Page Mon Compte"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number php">8</div><h3>Espace Mon Compte</h3></div>
+                    <p class="screen-description">L'espace personnel de l'utilisateur est divisé en deux sections : <strong>informations personnelles</strong> (nom, email) à gauche et <strong>sécurité</strong> (changement de mot de passe) à droite. En bas, les informations du compte (date d'inscription, dernière mise à jour, identifiant).</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Modification du nom et email</li>
+                        <li><i class="fas fa-chevron-right"></i> Changement de mot de passe sécurisé</li>
+                        <li><i class="fas fa-chevron-right"></i> Informations du compte (membre depuis, ID)</li>
+                        <li><i class="fas fa-chevron-right"></i> Navbar connectée (Ajout, Liste, Compte, Déconnexion)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retour -->
+            <div class="text-center mt-5">
+                <a href="projets.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #17678f, #155cac); border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600;">
+                    <i class="fas fa-arrow-left"></i> Retour aux Projets
+                </a>
+            </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){$(window).scroll(function(){$(this).scrollTop()>50?$('.navbar').addClass('scrolled'):$('.navbar').removeClass('scrolled')});const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform='translateY(0)')})},{threshold:.1});document.querySelectorAll('.screen-card,.cv-main-card,.screen-title-wrap').forEach(e=>{e.style.opacity='0';e.style.transform='translateY(30px)';e.style.transition='all 0.6s ease';o.observe(e)})});
+    </script>
+</body>
+</html>
