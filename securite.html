@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sécurité du projet BTS CIEL - Fahel Brik-Kettou">
+    <title>Sécurité - Projet BTS CIEL - Fahel Brik-Kettou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .security-card {
+            background: var(--bg-card, #fff);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .security-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+        .security-card.critical { border-color: #ef4444; }
+        .security-card.high { border-color: #f59e0b; }
+        .security-card.medium { border-color: #667eea; }
+        .security-card.info { border-color: #10b981; }
+
+        .security-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 1.25rem;
+        }
+        .security-icon.critical { background: #ef4444; }
+        .security-icon.high { background: #f59e0b; }
+        .security-icon.medium { background: #667eea; }
+        .security-icon.info { background: #10b981; }
+
+        .security-card h4 {
+            color: var(--text-primary, #1a1a2e);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .security-card p {
+            color: var(--text-secondary, #6b7280);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-top: 0.75rem;
+        }
+        .code-block .comment { color: #6c7086; }
+        .code-block .keyword { color: #cba6f7; }
+        .code-block .string { color: #a6e3a1; }
+        .code-block .function { color: #89b4fa; }
+
+        .threat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .threat-badge.critical { background: rgba(239,68,68,0.1); color: #ef4444; }
+        .threat-badge.high { background: rgba(245,158,11,0.1); color: #f59e0b; }
+        .threat-badge.medium { background: rgba(102,126,234,0.1); color: #667eea; }
+        .threat-badge.info { background: rgba(16,185,129,0.1); color: #10b981; }
+
+        .security-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        .flow-step {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--bg-card, #fff);
+            border: 1px solid rgba(102,126,234,0.15);
+            color: var(--text-primary, #1a1a2e);
+        }
+        .flow-arrow {
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-shield-alt"></i></div>
+                <h1>Sécurité du Projet BTS CIEL</h1>
+                <p class="lead">Toutes les mesures de sécurité implémentées pour protéger le gestionnaire de fichiers et le dashboard administrateur</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-lock"></i>
+                            <h3>Approche Sécurité</h3>
+                        </div>
+                        <p style="color: var(--text-secondary, #6b7280); font-size: 1.05rem; line-height: 1.8;">Le gestionnaire de fichiers du dashboard administrateur est la partie la plus sensible du site BTS CIEL. Il permet aux enseignants d'uploader des cours, des projets et des logiciels. Pour éviter toute exploitation malveillante, j'ai mis en place <strong>plusieurs couches de sécurité</strong> qui se complètent. Si une couche est contournée, la suivante bloque l'attaque.</p>
+
+                        <div class="security-flow">
+                            <span class="flow-step"><i class="fas fa-user-shield"></i> Auth Middleware</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-key"></i> Token CSRF</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-folder-open"></i> Whitelist Dossier</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-file-code"></i> Whitelist Extension</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-search"></i> Vérification MIME</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-broom"></i> Sanitization</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-map-marker-alt"></i> Realpath</span>
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                            <span class="flow-step"><i class="fas fa-clipboard-list"></i> Log d'Audit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gestionnaire de fichiers -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Fichiers</span>
+                <h2 class="section-title">Sécurisation du Gestionnaire de Fichiers</h2>
+                <p class="section-subtitle">6 couches de protection pour l'upload et la gestion des fichiers</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Whitelist Dossier -->
+                <div class="col-lg-6">
+                    <div class="security-card critical">
+                        <div class="security-icon critical"><i class="fas fa-folder-open"></i></div>
+                        <span class="threat-badge critical"><i class="fas fa-exclamation-triangle"></i> Protection critique</span>
+                        <h4>Whitelist de Dossiers</h4>
+                        <p>Seuls <strong>5 dossiers</strong> sont accessibles sur le serveur. Tout accès à un autre répertoire est automatiquement bloqué. Cela empêche un attaquant de naviguer dans l'arborescence du serveur.</p>
+                        <div class="code-block">
+                            <span class="comment">// Dossiers autorisés uniquement</span><br>
+                            <span class="keyword">$whitelist</span> = [<br>
+                            &nbsp;&nbsp;<span class="string">'cours'</span>,<br>
+                            &nbsp;&nbsp;<span class="string">'projet'</span>,<br>
+                            &nbsp;&nbsp;<span class="string">'logiciels'</span>,<br>
+                            &nbsp;&nbsp;<span class="string">'images'</span>,<br>
+                            &nbsp;&nbsp;<span class="string">'docs'</span><br>
+                            ];
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Whitelist Extension -->
+                <div class="col-lg-6">
+                    <div class="security-card critical">
+                        <div class="security-icon critical"><i class="fas fa-file-code"></i></div>
+                        <span class="threat-badge critical"><i class="fas fa-exclamation-triangle"></i> Protection critique</span>
+                        <h4>Whitelist d'Extensions par Dossier</h4>
+                        <p>Chaque dossier a ses <strong>extensions autorisées</strong>. Par exemple, le dossier "images" n'accepte que les fichiers .jpg, .png et .gif. Un fichier .php ou .exe ne pourra jamais être uploadé dans ce dossier.</p>
+                        <div class="code-block">
+                            <span class="comment">// Extensions par dossier</span><br>
+                            <span class="string">'images'</span> => [<span class="string">'jpg'</span>, <span class="string">'png'</span>, <span class="string">'gif'</span>]<br>
+                            <span class="string">'cours'</span>&nbsp; => [<span class="string">'pdf'</span>, <span class="string">'docx'</span>, <span class="string">'pptx'</span>]<br>
+                            <span class="string">'logiciels'</span> => [<span class="string">'exe'</span>, <span class="string">'msi'</span>, <span class="string">'zip'</span>]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vérification MIME -->
+                <div class="col-lg-6">
+                    <div class="security-card high">
+                        <div class="security-icon high"><i class="fas fa-search"></i></div>
+                        <span class="threat-badge high"><i class="fas fa-exclamation-circle"></i> Protection haute</span>
+                        <h4>Vérification MIME Type</h4>
+                        <p>L'extension seule ne suffit pas : un attaquant peut renommer un fichier malveillant "virus.php" en "virus.jpg". La vérification MIME analyse le <strong>vrai contenu du fichier</strong> (ses octets) pour confirmer qu'il correspond bien à l'extension déclarée. Un script déguisé en image est immédiatement rejeté.</p>
+                        <div class="code-block">
+                            <span class="comment">// Vérifie le vrai contenu, pas juste le nom</span><br>
+                            <span class="keyword">$mime</span> = <span class="function">finfo_file</span>($finfo, $file);<br>
+                            <span class="comment">// "virus.php" renommé en "virus.jpg"</span><br>
+                            <span class="comment">// → MIME détecte "text/x-php" → BLOQUÉ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anti Path Traversal -->
+                <div class="col-lg-6">
+                    <div class="security-card high">
+                        <div class="security-icon high"><i class="fas fa-route"></i></div>
+                        <span class="threat-badge high"><i class="fas fa-exclamation-circle"></i> Protection haute</span>
+                        <h4>Anti Path Traversal</h4>
+                        <p>Les attaques par <strong>path traversal</strong> utilisent des séquences comme <code>../</code> pour remonter dans l'arborescence du serveur et accéder à des fichiers système sensibles (ex: <code>../../etc/passwd</code>). Toute requête contenant <code>../</code> ou <code>..\</code> est bloquée.</p>
+                        <div class="code-block">
+                            <span class="comment">// Requête malveillante :</span><br>
+                            <span class="string">"../../etc/passwd"</span><br>
+                            <span class="comment">// → Détection de "../" → BLOQUÉ ❌</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sanitization -->
+                <div class="col-lg-6">
+                    <div class="security-card medium">
+                        <div class="security-icon medium"><i class="fas fa-broom"></i></div>
+                        <span class="threat-badge medium"><i class="fas fa-info-circle"></i> Protection moyenne</span>
+                        <h4>Sanitization des Noms de Fichiers</h4>
+                        <p>Le nom de chaque fichier uploadé est <strong>nettoyé automatiquement</strong> pour supprimer tous les caractères dangereux : espaces, caractères spéciaux, accents, points multiples. Cela empêche les injections via le nom de fichier et les problèmes d'encodage sur le serveur.</p>
+                        <div class="code-block">
+                            <span class="comment">// Avant : </span><span class="string">"Mon fichier (2)..php.jpg"</span><br>
+                            <span class="comment">// Après : </span><span class="string">"mon-fichier-2.jpg"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Double vérification Realpath -->
+                <div class="col-lg-6">
+                    <div class="security-card medium">
+                        <div class="security-icon medium"><i class="fas fa-map-marker-alt"></i></div>
+                        <span class="threat-badge medium"><i class="fas fa-info-circle"></i> Protection moyenne</span>
+                        <h4>Double Vérification avec realpath()</h4>
+                        <p>Même après toutes les vérifications précédentes, la fonction <code>realpath()</code> de PHP est utilisée comme <strong>dernière ligne de défense</strong>. Elle résout le chemin absolu réel du fichier et confirme qu'il se trouve bien dans le dossier autorisé. Si le fichier a été déplacé ou si un lien symbolique malveillant existe, c'est bloqué.</p>
+                        <div class="code-block">
+                            <span class="comment">// Vérifie le chemin RÉEL sur le disque</span><br>
+                            <span class="keyword">$realPath</span> = <span class="function">realpath</span>($path);<br>
+                            <span class="comment">// Confirme qu'il est dans le bon dossier</span><br>
+                            <span class="function">str_starts_with</span>($realPath, $allowedDir);
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sécurité globale -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <span class="section-badge">Application</span>
+                <h2 class="section-title">Sécurité Globale de l'Application</h2>
+                <p class="section-subtitle">Protections transversales appliquées à l'ensemble du site</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- CSRF -->
+                <div class="col-lg-6">
+                    <div class="security-card critical">
+                        <div class="security-icon critical"><i class="fas fa-key"></i></div>
+                        <span class="threat-badge critical"><i class="fas fa-exclamation-triangle"></i> Protection critique</span>
+                        <h4>Protection CSRF</h4>
+                        <p>Chaque formulaire du site contient un <strong>token CSRF unique</strong> généré par Laravel. Ce token est vérifié côté serveur avant l'exécution de chaque requête POST. Un attaquant qui tenterait de soumettre un formulaire depuis un site externe serait bloqué car il ne possède pas le token valide.</p>
+                        <div class="code-block">
+                            <span class="comment">&lt;!-- Token unique dans chaque formulaire --&gt;</span><br>
+                            <span class="keyword">@csrf</span><br>
+                            <span class="comment">// Génère : &lt;input type="hidden"</span><br>
+                            <span class="comment">//&nbsp;&nbsp;name="_token" value="aB3x..."&gt;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hashage bcrypt -->
+                <div class="col-lg-6">
+                    <div class="security-card critical">
+                        <div class="security-icon critical"><i class="fas fa-lock"></i></div>
+                        <span class="threat-badge critical"><i class="fas fa-exclamation-triangle"></i> Protection critique</span>
+                        <h4>Hashage des Mots de Passe (bcrypt)</h4>
+                        <p>Les mots de passe ne sont <strong>jamais stockés en clair</strong> dans la base de données. Ils sont hashés avec l'algorithme <strong>bcrypt</strong> fourni par Laravel. Même si la base est compromise, les mots de passe restent illisibles. Bcrypt inclut un "salt" unique pour chaque mot de passe, rendant les attaques par dictionnaire inefficaces.</p>
+                        <div class="code-block">
+                            <span class="comment">// Mot de passe en clair : "monMotDePasse"</span><br>
+                            <span class="comment">// Stocké en BDD :</span><br>
+                            <span class="string">"$2y$10$Xk9fJ...92 caractères..."</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- XSS -->
+                <div class="col-lg-6">
+                    <div class="security-card high">
+                        <div class="security-icon high"><i class="fas fa-code"></i></div>
+                        <span class="threat-badge high"><i class="fas fa-exclamation-circle"></i> Protection haute</span>
+                        <h4>Protection XSS (Cross-Site Scripting)</h4>
+                        <p>Le moteur de template <strong>Blade</strong> de Laravel protège automatiquement contre les attaques XSS. Quand on affiche une variable avec la syntaxe <code>{{ }}</code>, Blade <strong>échappe automatiquement</strong> tout le HTML et le JavaScript. Un script malveillant injecté par un utilisateur sera affiché comme du texte brut au lieu d'être exécuté.</p>
+                        <div class="code-block">
+                            <span class="comment">// Input malveillant :</span><br>
+                            <span class="string">"&lt;script&gt;alert('hack')&lt;/script&gt;"</span><br>
+                            <span class="comment">// Blade affiche en texte brut :</span><br>
+                            <span class="string">"&amp;lt;script&amp;gt;alert('hack')&amp;lt;/script&amp;gt;"</span><br>
+                            <span class="comment">// → Le script n'est PAS exécuté ✅</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middleware Auth -->
+                <div class="col-lg-6">
+                    <div class="security-card high">
+                        <div class="security-icon high"><i class="fas fa-user-shield"></i></div>
+                        <span class="threat-badge high"><i class="fas fa-exclamation-circle"></i> Protection haute</span>
+                        <h4>Middleware d'Authentification (Anti Brute Force)</h4>
+                        <p>Le dashboard administrateur est protégé par un <strong>middleware auth</strong> qui vérifie que l'utilisateur est connecté avant chaque requête. Sans authentification, impossible d'accéder aux pages d'administration. Seuls les enseignants possédant un compte ont accès au dashboard. Cela protège aussi contre les attaques par force brute car l'accès est conditionné à une session valide.</p>
+                        <div class="code-block">
+                            <span class="comment">// Routes protégées par middleware</span><br>
+                            Route::<span class="function">middleware</span>(<span class="string">'auth'</span>)<br>
+                            &nbsp;&nbsp;-><span class="function">group</span>(<span class="keyword">function</span>() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Dashboard, fichiers, actualités...</span><br>
+                            &nbsp;&nbsp;});
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taille max -->
+                <div class="col-lg-6">
+                    <div class="security-card info">
+                        <div class="security-icon info"><i class="fas fa-weight-hanging"></i></div>
+                        <span class="threat-badge info"><i class="fas fa-check-circle"></i> Protection standard</span>
+                        <h4>Limite de Taille (50 Mo)</h4>
+                        <p>Chaque fichier uploadé est limité à <strong>50 Mo maximum</strong>. Cela empêche les attaques par déni de service (DoS) où un attaquant tenterait de saturer l'espace disque du serveur en uploadant des fichiers très volumineux de manière répétée.</p>
+                    </div>
+                </div>
+
+                <!-- .exe autorisé -->
+                <div class="col-lg-6">
+                    <div class="security-card info">
+                        <div class="security-icon info"><i class="fas fa-desktop"></i></div>
+                        <span class="threat-badge info"><i class="fas fa-check-circle"></i> Choix fonctionnel</span>
+                        <h4>Fichiers .exe Autorisés (Logiciels)</h4>
+                        <p>Les fichiers <strong>.exe sont autorisés</strong> uniquement dans le dossier "logiciels" car les enseignants ont besoin de partager des outils pédagogiques avec les élèves. Ce risque est acceptable car <strong>seuls les enseignants authentifiés</strong> via le dashboard ont la possibilité d'uploader des fichiers — les visiteurs n'ont aucun accès à l'upload.</p>
+                    </div>
+                </div>
+
+                <!-- Log d'audit -->
+                <div class="col-lg-12">
+                    <div class="security-card medium">
+                        <div class="security-icon medium"><i class="fas fa-clipboard-list"></i></div>
+                        <span class="threat-badge medium"><i class="fas fa-info-circle"></i> Traçabilité</span>
+                        <h4>Logs d'Audit</h4>
+                        <p>Chaque action effectuée dans le dashboard administrateur est <strong>enregistrée dans un log d'audit</strong>. Cela permet de savoir exactement qui a fait quoi, quand et depuis quelle adresse IP. En cas d'incident, on peut retracer tout l'historique des actions.</p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="code-block">
+                                    <span class="comment">// Informations enregistrées :</span><br>
+                                    <span class="string">"qui"</span>&nbsp;&nbsp;&nbsp; => <span class="string">"admin@lycee.fr"</span><br>
+                                    <span class="string">"quoi"</span>&nbsp;&nbsp; => <span class="string">"Upload fichier cours_php.pdf"</span><br>
+                                    <span class="string">"quand"</span>&nbsp; => <span class="string">"2025-02-10 14:32:05"</span><br>
+                                    <span class="string">"ip"</span>&nbsp;&nbsp;&nbsp;&nbsp; => <span class="string">"192.168.1.45"</span><br>
+                                    <span class="string">"dossier"</span> => <span class="string">"cours"</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p style="color: var(--text-secondary, #6b7280); font-size: 0.9rem; line-height: 1.8; margin-top: 0.5rem;">
+                                    Les logs permettent de répondre aux questions essentielles en cas d'audit : <strong>Qui</strong> a effectué l'action ? <strong>Quoi</strong> exactement ? <strong>Quand</strong> (date et heure précises) ? Depuis <strong>quelle adresse IP</strong> ? Dans <strong>quel dossier</strong> ? C'est indispensable pour la conformité et la détection d'activités suspectes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Résumé -->
+    <section class="py-5" style="background: var(--bg-alt, #f8f9fa);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-list-check"></i>
+                            <h3>Récapitulatif des Protections</h3>
+                        </div>
+                        <div class="row g-3 mt-3">
+                            <div class="col-md-6">
+                                <h5 style="color: var(--text-primary);"><i class="fas fa-folder-open" style="color: #ef4444;"></i> Gestionnaire de Fichiers</h5>
+                                <ul class="achievement-list">
+                                    <li><i class="fas fa-check"></i> Whitelist de 5 dossiers autorisés</li>
+                                    <li><i class="fas fa-check"></i> Extensions autorisées par dossier</li>
+                                    <li><i class="fas fa-check"></i> Vérification MIME du contenu réel</li>
+                                    <li><i class="fas fa-check"></i> Anti path traversal (../ bloqué)</li>
+                                    <li><i class="fas fa-check"></i> Sanitization des noms de fichiers</li>
+                                    <li><i class="fas fa-check"></i> Double vérification avec realpath()</li>
+                                    <li><i class="fas fa-check"></i> Taille maximale 50 Mo</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="color: var(--text-primary);"><i class="fas fa-globe" style="color: #667eea;"></i> Application Globale</h5>
+                                <ul class="achievement-list">
+                                    <li><i class="fas fa-check"></i> Token CSRF sur chaque formulaire</li>
+                                    <li><i class="fas fa-check"></i> Mots de passe hashés avec bcrypt</li>
+                                    <li><i class="fas fa-check"></i> Protection XSS via Blade</li>
+                                    <li><i class="fas fa-check"></i> Middleware auth sur le dashboard</li>
+                                    <li><i class="fas fa-check"></i> Logs d'audit (qui, quoi, quand, IP)</li>
+                                    <li><i class="fas fa-check"></i> Session timeout après inactivité</li>
+                                    <li><i class="fas fa-check"></i> Validation serveur sur tous les inputs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container text-center">
+            <h3 style="color: white; margin-bottom: 1rem;">Retour au projet complet</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Retrouvez l'ensemble du projet BTS CIEL : contexte, réalisations, architecture Docker et compétences.</p>
+            <a href="experiencePro.html" class="btn btn-light btn-lg" style="border-radius: 50px; font-weight: 600; padding: 0.75rem 2rem;">
+                <i class="fas fa-arrow-left"></i> Retour au Projet BTS CIEL
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){$(window).scroll(function(){$(this).scrollTop()>50?$('.navbar').addClass('scrolled'):$('.navbar').removeClass('scrolled')});const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform='translateY(0)')})},{threshold:.1});document.querySelectorAll('.security-card,.cv-main-card').forEach(e=>{e.style.opacity='0';e.style.transform='translateY(30px)';e.style.transition='all 0.6s ease';o.observe(e)})});
+    </script>
+</body>
+</html>
