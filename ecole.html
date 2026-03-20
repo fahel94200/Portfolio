@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projet GestionEcole - Portail Académique Laravel">
+    <title>GestionEcole - Fahel Brik-Kettou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .screen-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);border:1px solid rgba(102,126,234,.1);transition:all .3s ease}
+        .screen-card:hover{transform:translateY(-4px);box-shadow:0 16px 45px rgba(102,126,234,.15)}
+        .screen-card img{width:100%;height:auto;display:block}
+        .screen-card img.capped{max-height:400px;object-fit:contain;background:#f8f9fa}
+        .screen-number{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#10b981,#4facfe);color:white;font-size:1.1rem;font-weight:700;flex-shrink:0}
+        .screen-title-wrap{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+        .screen-title-wrap h3{margin:0;color:var(--text-primary,#1a1a2e);font-weight:700}
+        .screen-description{color:var(--text-secondary,#6b7280);font-size:.95rem;line-height:1.8}
+        .screen-features{list-style:none;padding:0;margin:1.25rem 0 0}
+        .screen-features li{padding:.4rem 0;color:var(--text-secondary,#6b7280);font-size:.9rem;display:flex;align-items:flex-start;gap:.6rem}
+        .screen-features li i{color:#10b981;margin-top:.2rem;flex-shrink:0}
+        .screen-section{padding:4rem 0}
+        .screen-section:nth-child(even){background:var(--bg-alt,#f8f9fa)}
+        .screen-section:nth-child(odd){background:var(--bg-main,#fff)}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-school"></i></div>
+                <h1>GestionEcole</h1>
+                <p class="lead">Portail académique de gestion des élèves développé en PHP Laravel avec architecture MVC</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Présentation du Projet</h3>
+                        </div>
+                        <p class="screen-description">GestionEcole est un <strong>système de gestion d'élèves</strong> développé en PHP Laravel dans le cadre de mon BTS SIO. L'application permet de centraliser les données des étudiants, de gérer leurs informations personnelles et de suivre leurs performances académiques à travers une interface simple et efficace.</p>
+                        <p class="screen-description">Le projet met en pratique les <strong>opérations CRUD complètes</strong> (Create, Read, Update, Delete) avec une base de données MySQL, le tout structuré en architecture MVC grâce au framework Laravel et stylisé avec Bootstrap.</p>
+                        <div class="row g-3 mt-4">
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-calendar-alt"></i><div><strong>Durée</strong><p>2 mois</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fab fa-laravel"></i><div><strong>Framework</strong><p>PHP Laravel (MVC)</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fas fa-database"></i><div><strong>Base de données</strong><p>MySQL</p></div></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="meta-item"><i class="fab fa-bootstrap"></i><div><strong>Interface</strong><p>Bootstrap 5</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 1 : Liste des élèves -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="gestionSupp.png" alt="Liste des élèves - GestionEcole"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number">1</div><h3>Liste des Élèves</h3></div>
+                    <p class="screen-description">La page principale affiche la <strong>liste complète des élèves</strong> sous forme de tableau avec leurs informations essentielles : nom, prénom et email. Chaque ligne dispose de trois boutons d'action : Voir (détails), Supprimer et Modifier.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Tableau responsive avec colonnes Nom, Prénom, Email</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Voir" pour accéder au profil complet</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Supprimer" (rouge) pour retirer un élève</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Modifier" pour éditer les informations</li>
+                        <li><i class="fas fa-chevron-right"></i> Menu déroulant pour filtrer par classe</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Ajouter un élève" en haut à droite</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 2 : Profil élève -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="profilEleve.png" alt="Profil d'un élève"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number">2</div><h3>Profil d'un Élève</h3></div>
+                    <p class="screen-description">En cliquant sur "Voir", on accède à la <strong>fiche détaillée de l'élève</strong> avec sa photo de profil, son nom complet, sa date de naissance et son adresse email. Un bouton "Retour" permet de revenir à la liste.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Photo de profil de l'élève</li>
+                        <li><i class="fas fa-chevron-right"></i> Nom et prénom affichés</li>
+                        <li><i class="fas fa-chevron-right"></i> Date de naissance</li>
+                        <li><i class="fas fa-chevron-right"></i> Adresse email</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton retour vers la liste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 3 : Modification -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="modifInfo.png" alt="Modification des informations d'un élève"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number">3</div><h3>Modifier les Informations</h3></div>
+                    <p class="screen-description">Le formulaire de modification est <strong>pré-rempli avec les données actuelles</strong> de l'élève. On peut modifier le nom, le prénom, la date de naissance, l'email et changer la photo de profil. Deux boutons : "Envoyer" pour valider et "Annuler" pour revenir sans modifier.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champs pré-remplis (nom, prénom, date, email)</li>
+                        <li><i class="fas fa-chevron-right"></i> Sélecteur de date pour la date de naissance</li>
+                        <li><i class="fas fa-chevron-right"></i> Upload d'une nouvelle photo</li>
+                        <li><i class="fas fa-chevron-right"></i> Boutons Envoyer et Annuler</li>
+                        <li><i class="fas fa-chevron-right"></i> Validation côté serveur via Laravel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 4 : Ajout -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="tableauEleve.png" alt="Formulaire d'ajout d'un élève" class="capped"></div></div>
+                <div class="col-lg-5">
+                    <div class="screen-title-wrap"><div class="screen-number">4</div><h3>Ajouter un Élève</h3></div>
+                    <p class="screen-description">Le formulaire d'ajout permet de <strong>créer un nouvel élève</strong> dans le système. Il demande toutes les informations nécessaires : nom, prénom, classe (avec la sélection "BTS SIO 1 A"), date de naissance, email et photo de profil.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champs : nom, prénom, classe, date de naissance, email</li>
+                        <li><i class="fas fa-chevron-right"></i> Sélection de la classe (BTS SIO 1 A, etc.)</li>
+                        <li><i class="fas fa-chevron-right"></i> Upload de la photo de profil</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Envoyer" pour valider l'inscription</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Annuler" pour revenir à la liste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retour -->
+    <div class="text-center mt-5 mb-5">
+        <a href="veille.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #17678f, #155cac); border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600;">
+            <i class="fas fa-arrow-left"></i> Retour à la Veille
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88ec68a9a8183d1dcdad8d8a88f85898184c68b8785">[email&#160;protected]</a></p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script>
+    $(document).ready(function(){
+        // Navbar scroll effect
+        $(window).scroll(function(){
+            if($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+
+        // Animation on scroll
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.screen-card, .cv-main-card, .screen-title-wrap').forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    });
+</script>
+</body>
+</html>
