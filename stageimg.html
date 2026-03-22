@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Captures d'écran du projet BTS CIEL - Fahel Brik-Kettou">
+    <title>Projet BTS CIEL - Screenshots - Fahel Brik-Kettou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .screen-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);border:1px solid rgba(102,126,234,.1);transition:all .3s ease}
+        .screen-card:hover{transform:translateY(-4px);box-shadow:0 16px 45px rgba(102,126,234,.15)}
+        .screen-card img{width:100%;height:auto;display:block}
+        .screen-number{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#4f6ef7,#7c3aed);color:white;font-size:1.1rem;font-weight:700;flex-shrink:0}
+        .screen-title-wrap{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+        .screen-title-wrap h3{margin:0;color:var(--text-primary,#1a1a2e);font-weight:700}
+        .screen-description{color:var(--text-secondary,#6b7280);font-size:.95rem;line-height:1.8}
+        .screen-features{list-style:none;padding:0;margin:1.25rem 0 0}
+        .screen-features li{padding:.4rem 0;color:var(--text-secondary,#6b7280);font-size:.9rem;display:flex;align-items:flex-start;gap:.6rem}
+        .screen-features li i{color:#4f6ef7;margin-top:.2rem;flex-shrink:0}
+        .screen-section{padding:4rem 0}
+        .screen-section:nth-child(even){background:var(--bg-alt,#f8f9fa)}
+        .screen-section:nth-child(odd){background:var(--bg-main,#fff)}
+        .section-badge-type{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .85rem;border-radius:50px;font-size:.8rem;font-weight:600;margin-bottom:.75rem}
+        .section-badge-type.public{background:rgba(16,185,129,.1);color:#10b981}
+        .section-badge-type.admin{background:rgba(239,68,68,.1);color:#ef4444}
+        .section-badge-type.bdd{background:rgba(245,158,11,.1);color:#f59e0b}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i> Fahel Brik-Kettou</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="veille.html">Veille Technologique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projets.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="experiencePro.html">Experiences professionnelles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header-cv">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon"><i class="fas fa-images"></i></div>
+                <h1>Site BTS CIEL — Captures d'Écran</h1>
+                <p class="lead">Aperçu visuel du site pédagogique développé en Laravel lors de mon stage au Lycée Christophe Colomb</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="py-5" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="cv-main-card">
+                        <div class="cv-section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Aperçu du Projet</h3>
+                        </div>
+                        <p class="screen-description">Voici un aperçu du site BTS CIEL que j'ai développé lors de mon stage au Lycée Christophe Colomb. Le site est divisé en deux parties : la <strong>partie publique</strong> accessible par les visiteurs et les élèves (accueil, cours, actualités), et la <strong>partie administrateur</strong> réservée aux enseignants (gestion des fichiers, actualités, comptes admin).</p>
+                        <div class="row g-3 mt-3">
+                            <div class="col-md-4 text-center">
+                                <span class="section-badge-type public"><i class="fas fa-globe"></i> Partie Publique</span>
+                                <p style="font-size:.85rem;color:var(--text-secondary);">Visible par tous les visiteurs</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="section-badge-type admin"><i class="fas fa-lock"></i> Partie Admin</span>
+                                <p style="font-size:.85rem;color:var(--text-secondary);">Réservée aux enseignants</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="section-badge-type bdd"><i class="fas fa-database"></i> Base de Données</span>
+                                <p style="font-size:.85rem;color:var(--text-secondary);">Schéma MySQL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 1 : Accueil -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="acceuilCiel.png" alt="Page d'accueil BTS CIEL"></div></div>
+                <div class="col-lg-5">
+                    <span class="section-badge-type public"><i class="fas fa-globe"></i> Partie Publique</span>
+                    <div class="screen-title-wrap"><div class="screen-number">1</div><h3>Page d'Accueil</h3></div>
+                    <p class="screen-description">La page d'accueil du portail BTS CIEL accueille les visiteurs avec un message de bienvenue et un <strong>carrousel d'images</strong> montrant les installations du lycée (salles de TP, équipements). La navbar offre un accès rapide à toutes les sections : BTS CIEL, Cours d'Info, Logiciels, Projets, Articles et Actualités.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Navbar complète avec 8 rubriques</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Admin" en haut à gauche pour les enseignants</li>
+                        <li><i class="fas fa-chevron-right"></i> Message de bienvenue avec bannière</li>
+                        <li><i class="fas fa-chevron-right"></i> Carrousel d'images des installations</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "Nos Installations" en call-to-action</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 2 : Cours -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="imageCoursCiel.png" alt="Page des cours BTS CIEL"></div></div>
+                <div class="col-lg-5">
+                    <span class="section-badge-type public"><i class="fas fa-globe"></i> Partie Publique</span>
+                    <div class="screen-title-wrap"><div class="screen-number">2</div><h3>Page des Cours</h3></div>
+                    <p class="screen-description">La page "Cours d'Info" présente l'ensemble des <strong>matières enseignées en BTS CIEL</strong>, organisées en 3 catégories avec des cards colorées : Programmation (Algorithmique, C++, Java, PHP, POO/UML), Systèmes (Architecture, Linux, Windows, Arduino) et Communication (Réseaux, Télécommunications, Bases de données).</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> 3 catégories : Programmation, Systèmes, Communication</li>
+                        <li><i class="fas fa-chevron-right"></i> Cards bleues avec icônes pour chaque catégorie</li>
+                        <li><i class="fas fa-chevron-right"></i> Liste des matières avec liens vers les ressources</li>
+                        <li><i class="fas fa-chevron-right"></i> Bouton "La physique c'est par ici" pour les cours supplémentaires</li>
+                        <li><i class="fas fa-chevron-right"></i> Fichiers gérés dynamiquement via le dashboard admin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 3 : Actualités -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="actuCiel.png" alt="Page des actualités BTS CIEL"></div></div>
+                <div class="col-lg-5">
+                    <span class="section-badge-type public"><i class="fas fa-globe"></i> Partie Publique</span>
+                    <div class="screen-title-wrap"><div class="screen-number">3</div><h3>Page des Actualités</h3></div>
+                    <p class="screen-description">La page Actualités affiche les <strong>événements et annonces</strong> publiés par les administrateurs. Chaque actualité est présentée dans une card avec la date de publication, un badge de catégorie (Événement), le titre et le contenu. Le footer affiche "Création : Fahel Brik" avec un lien vers le site officiel du lycée.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Cards d'actualités avec date et catégorie</li>
+                        <li><i class="fas fa-chevron-right"></i> Badge "Événement" en couleur</li>
+                        <li><i class="fas fa-chevron-right"></i> Contenu géré dynamiquement (CRUD) depuis le dashboard</li>
+                        <li><i class="fas fa-chevron-right"></i> Footer avec crédit et lien vers le lycée</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 4 : Connexion Admin -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center flex-lg-row-reverse">
+                <div class="col-lg-7"><div class="screen-card"><img src="formulaireCiel.png" alt="Page de connexion administrateur"></div></div>
+                <div class="col-lg-5">
+                    <span class="section-badge-type admin"><i class="fas fa-lock"></i> Partie Admin</span>
+                    <div class="screen-title-wrap"><div class="screen-number">4</div><h3>Espace Administrateur — Connexion</h3></div>
+                    <p class="screen-description">La page de connexion de l'espace administrateur a un <strong>design dégradé violet</strong> distinct du reste du site pour marquer la séparation entre la partie publique et la partie privée. Le formulaire demande un nom d'utilisateur et un mot de passe. Un bouton "Retour au site" permet de revenir à la partie publique.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Design dégradé violet pour différencier l'espace admin</li>
+                        <li><i class="fas fa-chevron-right"></i> Champs : nom d'utilisateur + mot de passe</li>
+                        <li><i class="fas fa-chevron-right"></i> Icône œil pour afficher/masquer le mot de passe</li>
+                        <li><i class="fas fa-chevron-right"></i> Mention "Connexion sécurisée" en bas</li>
+                        <li><i class="fas fa-chevron-right"></i> Mot de passe hashé avec bcrypt côté serveur</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 5 : Créer Admin -->
+    <section class="screen-section">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div class="screen-card"><img src="creerAdminCiel.png" alt="Formulaire de création d'administrateur"></div></div>
+                <div class="col-lg-5">
+                    <span class="section-badge-type admin"><i class="fas fa-lock"></i> Partie Admin</span>
+                    <div class="screen-title-wrap"><div class="screen-number">5</div><h3>Création d'un Administrateur</h3></div>
+                    <p class="screen-description">Depuis le dashboard, un administrateur existant peut <strong>créer un nouveau compte admin</strong> pour un autre enseignant. Le formulaire demande un nom d'utilisateur, un email optionnel, un mot de passe avec confirmation, et un toggle pour activer ou désactiver le compte immédiatement.</p>
+                    <ul class="screen-features">
+                        <li><i class="fas fa-chevron-right"></i> Champ nom d'utilisateur (lettres, chiffres, underscores)</li>
+                        <li><i class="fas fa-chevron-right"></i> Email optionnel</li>
+                        <li><i class="fas fa-chevron-right"></i> Mot de passe + confirmation (minimum 8 caractères)</li>
+                        <li><i class="fas fa-chevron-right"></i> Toggle "Compte actif immédiatement"</li>
+                        <li><i class="fas fa-chevron-right"></i> Boutons "Créer l'administrateur" et "Annuler"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retour -->
+    <div class="text-center mt-5 mb-5">
+        <a href="veille.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #17678f, #155cac); border: none; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600;">
+            <i class="fas fa-arrow-left"></i> Retour à la Veille
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><h3><i class="fas fa-code"></i> Fahel Brik-Kettou</h3><p>Développeur Web & Applicatif</p></div>
+                <div class="footer-links"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="cv.html">CV</a></li><li><a href="veille.html">Veille Technologique</a></li><li><a href="projets.html">Projets</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-envelope"></i> f.brik94200@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ivry-Sur-Seine, 94200</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Fahel Brik-Kettou - Tous droits réservés</p><p class="footer-tech">Portfolio réalisé avec <i class="fas fa-heart"></i> en HTML, Bootstrap, CSS & jQuery</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                $(this).scrollTop() > 50 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled');
+            });
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.screen-card, .cv-main-card, .screen-title-wrap').forEach(function(el) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
